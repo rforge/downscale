@@ -1,12 +1,12 @@
 Package: downscale
 Type: Package
 Title: Downscaling species occupancy
-Version: 0.1
-Date: 2014-11-27
+Version: 0.2
+Date: 2014-11-28
 Author: Charles Marsh [aut, cre]
 Maintainer: Charles Marsh <charliem2003@gmail.com>
 Description: A set of functions that downscales species occupancy at
     coarse grain sizes to predict species occupancy at fine grain sizes.
 License: GPL-2
-Depends: minpack.lm, Rmpfr
+Imports: minpack.lm, Rmpfr
 LazyData: true
