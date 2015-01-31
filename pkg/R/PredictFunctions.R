@@ -1,8 +1,12 @@
 ################################################################################
 # 
 # PredictFunctions.R
-# Version 1.1
+# Version 1.2
 # 28/01/2015
+#
+# Updates:
+#   30/01/2015: Thomas model added
+#   28/01/2015: Altered gamma function in Finite Negative Binomial model
 #
 # Functions for downscaled prediction of area of occupancy for a given 
 # grain size (A) given the parameters for that model. Model parameters may
@@ -18,6 +22,7 @@
 #   GNB       Generalised negative binomial model
 #   INB       Improved negative binomial model
 #   FNB       Finite negative binomial model
+#   Thomas    Thomas model
 #
 # requires(Rmpfr)
 #   # Note: The Finite Negative Binomial model requires multiple precision 
@@ -26,91 +31,91 @@
 ################################################################################
 
 ### Nachman
-PredictNachman <- function(par, Area) {
+PredictNachman <- function(par, area) {
   # Predicts area of occupancy for grain size A using the Nachman model
   #
   # Args:
   #   par: dataframe containing parameters C and z of the Nachman model
-  #   A: Grain size (km2) to be predicted
-  AOO <- 1 - exp(-par$C * Area ^ par$z)
+  #   area: Grain size (km2) to be predicted
+  AOO <- log(1 - exp(-par$C * area ^ par$z))
   return(AOO)
 }
 
 ### Power Law
-PredictPL <- function(par, Area) {
+PredictPL <- function(par, area) {
   # Predicts area of occupancy for grain size A using the Power law model
   #
   # Args:
   #   par: dataframe containing parameters C and z of the Power law model
-  #   A: Grain size (km2) to be predicted
-  AOO <- par$C * Area^par$z
+  #   area: Grain size (km2) to be predicted
+  AOO <- log(par$C * area ^ par$z)
   return(AOO)
 }
 
 ### Logistic
-PredictLogis <- function(par, Area) {
+PredictLogis <- function(par, area) {
   # Predicts area of occupancy for grain size A using the Logistic model
   #
   # Args:
   #   par: dataframe containing parameters C and z of the Logistic model
-  #   A: Grain size (km2) to be predicted
-  AOO <- (par$C * (Area^par$z)) / (1 + (par$C * (Area^par$z)))
+  #   area: Grain size (km2) to be predicted
+  AOO <- log((par$C * (area ^ par$z)) / (1 + (par$C * (area ^ par$z))))
   return(AOO)
 }
 
 ### Poisson
-PredictPoisson <- function(par, Area) {
+PredictPoisson <- function(par, area) {
   # Predicts area of occupancy for grain size A using the Poisson model
   #
   # Args:
   #   par: dataframe containing parameter lambda of the Poisson model
-  #   A: Grain size (km2) to be predicted
-  AOO <- 1 - (exp(-par$lambda * Area))
+  #   area: Grain size (km2) to be predicted
+  AOO <- log(1 - (exp(-par$lambda * area)))
   return(AOO)
 }
 
 ### Negative binomial model
-PredictNB <- function(par, Area) {
+PredictNB <- function(par, area) {
   # Predicts area of occupancy for grain size A using the Negative 
   # Binomial model
   #
   # Args:
   #   par: dataframe containing parameters C and k of the Negative
   #        Binomial model
-  #   A: Grain size (km2) to be predicted
-  AOO <- 1 - (1 + (par$C * Area) / par$k)^-par$k
+  #   area: Grain size (km2) to be predicted
+  AOO <- log(1 - (1 + (par$C * area) / par$k) ^ -par$k)
   return(AOO)
 }
 
 ### Generalised negative binomial model
-PredictGNB <- function(par, Area) {
+PredictGNB <- function(par, area) {
   # Predicts area of occupancy for grain size A using the Generalised Negative 
   # Binomial model
   #
   # Args:
   #   par: dataframe containing parameters C, z and k of the Generalised 
   #        Negative Binomial model
-  #   A: Grain size (km2) to be predicted
-  AOO <- 1 - (1 + (par$C * Area^par$z) / par$k)^-par$k
+  #   area: Grain size (km2) to be predicted
+  AOO <- log(1 - (1 + (par$C * area ^ par$z) / par$k) ^ -par$k)
   return(AOO)
 }
 
 ### Improved negative binomial model
-PredictINB <- function(par, Area) {
+PredictINB <- function(par, area) {
   # Predicts area of occupancy for grain size A using the Improved Negative 
   # Binomial model
   #
   # Args:
   #   par: dataframe containing parameters C and b of the Improved 
   #        Negative Binomial model
-  #   A: Grain size (km2) to be predicted
-  AOO <- 1 - ((par$C* Area^(par$b - 1))^
-                ((par$r * Area) /(1 - par$C * Area^(par$b - 1))))
+  #   area: Grain size (km2) to be predicted
+  AOO <- log(1 - ((par$C * area ^ (par$b - 1))^
+                ((par$r * area) / (1 - par$C * area ^ (par$b - 1)))))
   return(AOO)
 }
 
 ### Finite negative binomial model
-PredictFNB <- function(par, Area, A0){
+PredictFNB <- function(par, area, extent){
   # Predicts area of occupancy for grain size A using the Finite Negative 
   # Binomial model. The function multiplies many gamma functions and so
   # integers may become larger than possible in R. Therefore  we use multiple
@@ -120,14 +125,33 @@ PredictFNB <- function(par, Area, A0){
   # Args:
   #   par: dataframe containing parameters W and k of the Finite
   #        Negative Binomial model
-  #   A: Grain size (km2) to be predicted
-  #   A0: Total area (km2)
-  gamma1 <- par$W + ((A0 * par$k) / Area) - par$k
-  gamma2 <- (A0 * par$k) / Area
-  gamma3 <- par$W + ((A0 * par$k) / Area)
-  gamma4 <- ((A0 * par$k) / Area) - par$k
-  AOO <- as.numeric(1 - (
+  #   area: Grain size (km2) to be predicted
+  #   extent: Total area (km2)
+  gamma1 <- par$W + ((extent * par$k) / area) - par$k
+  gamma2 <- (extent * par$k) / area
+  gamma3 <- par$W + ((extent * par$k) / area)
+  gamma4 <- ((extent * par$k) / area) - par$k
+  AOO <- suppressWarnings(as.numeric(log(1 - (
     (gamma(Rmpfr::mpfr(gamma1, 128)) * gamma(Rmpfr::mpfr(gamma2, 128))) /
-      (gamma(Rmpfr::mpfr(gamma3, 128)) * gamma(Rmpfr::mpfr(gamma4, 128)))))
+      (gamma(Rmpfr::mpfr(gamma3, 128)) * gamma(Rmpfr::mpfr(gamma4, 128)))))))
+  return(AOO)
+}
+
+### Thomas model
+PredictThomas <- function(par, area, extent, tolerance = 1e-6){
+  # Predicts area of occupancy for grain size A using the Thomas model.
+  #
+  # Args:
+  #   par: dataframe containing parameters rho, mu and sigma of the Thomas model
+  #   area: Grain size (km2) to be predicted
+  #   extent: Total area (km2)
+  #   tolerance: tolerance of the integration. The smaller the number the
+  #     greater the accuracy but longer the processing time
+  AOO <- sapply(1:length(area), 
+                function(i) log(1 - exp(-par$rho * espA(par = par,
+                                                        area = area[i],
+                                                        extent = extent,
+                                                        tolerance = tolerance)
+                                        )))
   return(AOO)
 }

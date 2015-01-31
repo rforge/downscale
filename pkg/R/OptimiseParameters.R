@@ -23,7 +23,7 @@
 #
 ################################################################################
 
-OptimiseParameters <- function(Area, Observed, model) {
+OptimiseParameters <- function(area, Observed, model) {
   # Retrive residual function, downscaling function and starting parameters
   # for model of choice
   resid.fun <- getFunction(paste("Resid", model, sep = ""))
@@ -33,7 +33,7 @@ OptimiseParameters <- function(Area, Observed, model) {
   # Optimisation procedure
   optimisation <- minpack.lm::nls.lm(par = starting.pars,
                                      fn = resid.fun,
-                                     A = Area,
+                                     area = area,
                                      observed = log(Observed),
                                      control = minpack.lm::nls.lm.control(
                                        maxiter = 1000))

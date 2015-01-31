@@ -1,8 +1,11 @@
 ################################################################################
 # 
 # StartingParams.R
-# Version 1.0
-# 28/01/2015
+# Version 1.1
+# 30/01/2015
+#
+# Updates:
+#   30/01/2015: Thomas model added
 #
 # Dataframes containing the starting parameters for the optimisation procedure
 # fitting model parameters to observed coarse-scale occupancy data:
@@ -14,6 +17,7 @@
 #   GNB       Generalised negative binomial model
 #   INB       Improved negative binomial model
 #   FNB       Finite negative binomial model
+#   Thomas    Thomas model
 #
 ################################################################################
 
@@ -40,3 +44,6 @@ ParamsINB <- data.frame("C" = 0.01, "r" = 1e-5, "b" = 1)
 
 ### Finite negative binomial model
 ParamsFNB <- data.frame("W" = 10, "k" = 10)
+
+### Thomas model
+ParamsThomas <- data.frame("rho" = 1e-5, "mu" = 10,"sigma" = 10)
