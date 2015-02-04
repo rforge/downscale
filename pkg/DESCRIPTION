@@ -16,6 +16,7 @@ LazyData: true
 Collate:
     'DataInput.R'
     'Downscale.R'
+    'Downscaling_Functions.R'
     'OptimiseParameters.R'
     'OptimiseParametersFNB.R'
     'OptimiseParametersThomas.R'
