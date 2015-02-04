@@ -4,16 +4,103 @@
 \alias{downscale}
 \title{Model area of occupancy against grain size for downscaling}
 \usage{
-downscale(occupancy, area, model, extent)
+downscale(occupancy, area, model, extent, tolerance = 1e-06)
 }
 \arguments{
-\item{AOO}{Observed area of occupancy}
+\item{occupancy}{vector of observed area of occupancies in squared units
+(e.g. km^{2}).}
 
-\item{Area}{Grain size}
+\item{area}{vector of grain sizes (in same units as occupancy).}
 
-\item{Model}{Downscaling model (see Details)}
+\item{model}{selected downscaling model, chosen from one of \code{"Nachman"},
+\code{"PL"}, \code{"Logis"}, \code{"Poisson"}, \code{"NB"}, \code{"GNB"},
+\code{"INB"}, \code{"FNB"}, \code{"Thomas"}. See \code{Details} below for
+model descriptions.}
+
+\item{extent}{total area in same units as occupancy (only required for
+\code{FNB} and \code{Thomas} models).}
+
+\item{tolerance}{only applicable for the \code{Thomas} model. The tolerance
+  used during integration in the Thomas model during optimisation of
+  parameters. Lower numbers allow for greater accuracy but require longer
+  processing times (default = \code{1e-6}).}
+}
+\value{
+\code{downscale} returns an object of class "downscale" containing
+  three objects:
+  \item{model}{Downscaling model selected.}
+  \item{pars}{Estimated parameters for the downscaling model.}
+   \item{observed}{Data frame containing two columns:
+   \tabular{lll}{
+     \code{Cell.area} \tab  \tab Grain sizes for which occupancy have been
+       observed\cr
+     \code{Occupancy} \tab  \tab Observed area of occupancy for each grain
+       size\cr
+     }
+   }
 }
 \description{
-Model area of occupancy against grain size for downscaling
+The function fits the log observed area of occupancy against
+  grain size for coarse-scale data (typically atlas data) for nine commonly
+  used downscaling models (see Azaele et al. 2012 and Barwell et al. 2014).
+  The parameters of the fitted models may then be used to estimate the area
+  of occupancy at finer grain sizes than the observed data using
+  \code{\link{predict.downscale}}.
+}
+\details{
+Nine downscaling models are available. \code{area} is the grain size
+  and \code{extent} the total area in the same units:
+ \tabular{llll}{
+   \code{"Nachman"} \tab  \tab Nachman model \tab
+     \emph{log(1 - exp(-C * area ^ z))}\cr
+   \code{"PL"} \tab  \tab  Power law model \tab
+     \emph{log(C * area ^ z)}\cr
+   \code{"Logis"} \tab  \tab  Logistic model \tab
+     \emph{log((C * (area ^ z)) / (1 + (C * (area ^ z))))}\cr
+   \code{"Poisson"} \tab  \tab  Poisson model \tab
+     \emph{log(1 - (exp(-lambda * area)))}\cr
+   \code{"NB"} \tab  \tab  Negative binomial model \tab
+     \emph{log(1 - (1 + (C * area) / k) ^ -k)}\cr
+   \code{"GNB"} \tab  \tab  Generalised negative binomial model \tab
+     \emph{log(1 - (1 + (C * area ^ z) / k) ^ -k)}\cr
+   \code{"INB"} \tab  \tab  Improved negative binomial model \tab
+     \emph{log(1 - ((C * area ^ (b - 1)) ^ ((r * area) /
+       (1 - C * area ^ (b - 1)))))}\cr
+   \code{"FNB"} \tab  \tab  Finite negative binomial model \tab
+     \emph{log(1 -
+       ((gamma(W + ((extent * k) / area) - k) * gamma(extent * k) / area) /
+       (gamma(W + ((extent * k) / area)) * gamma(((extent * k) / area) - k)))
+       }\cr
+   \code{"Thomas"} \tab  \tab  Thomas model \tab see below\cr
+ }
+
+ The finite negative binomial model (\code{"FNB"}) incorporates several gamma
+ functions. This may result in integers larger than is possible to store in
+ R. Therefore multiple precision floating point numbers (\code{\link{mpfr}}
+ function in package \pkg{Rmpfr}) are used to make calculations possible.
+
+ For the Thomas model LOTS OF BORING STUFF HERE
+}
+\examples{
+some examples
+}
+\author{
+Charles Marsh <\email{charliem2003@gmail.com}> with input from
+  Louise Barwell.
+}
+\references{
+Azaele, S., Cornell, S.J., & Kunin, W.E. (2012). Downscaling
+  species occupancy from coarse spatial scales. \emph{Ecological
+  Applications} 22, 1004-1014.
+
+Barwell, L.J., Azaele, S., Kunin, W.E., & Isaac, N.J.B. (2014).
+  Can coarse-grain patterns in insect atlas data predict local occupancy?
+  \emph{Diversity and Distributions} 20, 895-907.
+}
+\seealso{
+The function output may be used as the input for
+  \code{\link{predict.downscale}} for extrapolating downscaling functions to
+  smaller grain sizes using the estimated parameters from the downscale
+  output.
 }
 

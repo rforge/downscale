@@ -1,0 +1,15 @@
+NEWS for downscale package
+
+Changes for 0.3
+---------------
+04/02/2015
+ensemble.downscale function added
+
+Changes for 0.2
+---------------
+03/02/2015
+plotting function added and plotting option added to 'predict.downscale'
+output of function downscale defined as class 'downscale'
+output of function predict.downscale defined as class 'predict.downscale'
+outputs updated to include observed data for use in the plot function
+help files for downscale and predict.downscale updated

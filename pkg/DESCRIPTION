@@ -1,12 +1,28 @@
 Package: downscale
 Type: Package
 Title: Downscaling species occupancy
-Version: 0.2
+Version: 0.3
 Date: 2014-11-28
 Author: Charles Marsh [aut, cre]
 Maintainer: Charles Marsh <charliem2003@gmail.com>
 Description: A set of functions that downscales species occupancy at
     coarse grain sizes to predict species occupancy at fine grain sizes.
 License: GPL-2
-Imports: minpack.lm, Rmpfr, cubature
+Imports:
+    minpack.lm,
+    Rmpfr,
+    cubature
 LazyData: true
+Collate:
+    'DataInput.R'
+    'Downscale.R'
+    'OptimiseParameters.R'
+    'OptimiseParametersFNB.R'
+    'OptimiseParametersThomas.R'
+    'PredictFunctions.R'
+    'ResidFunctions.R'
+    'StartingParams.R'
+    'ThomasFunctions.R'
+    'plot.downscale.R'
+    'predict.downscale.R'
+    'ensemble.downscale.R'

@@ -1,6 +1,5 @@
 \name{Downscale-package}
-\alias{Downscale-package}
-\alias{Downscale}
+\alias{downscale-package}
 \docType{package}
 \title{
 Downscaling species occupancy
@@ -11,7 +10,7 @@ predict species occupancy at finer grain sizes.
 }
 \details{
 \tabular{ll}{
-Package: \tab Downscale\cr
+Package: \tab downscale\cr
 Type: \tab Package\cr
 Version: \tab 1.0\cr
 Date: \tab 2015-01-27\cr
@@ -27,7 +26,6 @@ Maintainer: Charles Marsh <charliem2003@gmail.com>
 \references{
 Literature or other references for background information
 }
-Optionally other standard keywords, one per line, from file KEYWORDS in the R documentation directory
 \keyword{ package }
 \seealso{
 Optional links to other man pages, e.g.

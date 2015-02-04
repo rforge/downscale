@@ -1,0 +1,16 @@
+tutorial
+namespaces?
+
+help files:
+- downscale
+    thomas model description
+    examples
+- predict.downscale
+    examples
+    arguments within function
+    proper ordering with plot
+- ensemble.downscale
+    examples
+- package helpfile
+    all of it
+    

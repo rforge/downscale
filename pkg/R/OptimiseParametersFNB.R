@@ -11,7 +11,7 @@
 #   Area: Vector of grain sizes for obsvered area of occupancies
 #   Observed: Vector of observed area of occupancies
 #   extent: Extent of study area (km2)
-#   Model = "FNB"
+#   model = "FNB"
 #
 # Returns:
 #   optim.pars: list of parameters estimated from optimisation procedure

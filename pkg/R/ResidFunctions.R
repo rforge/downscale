@@ -132,7 +132,7 @@ ResidThomas <- function(par, observed, area, extent, tolerance = 1e-6) {
   # grain size A using the Thomas model
   #
   # Args:
-  #   par: dataframe containing parameters rho, mu and sigman the Thomas model
+  #   par: dataframe containing parameters rho, mu and sigma the Thomas model
   #   area: Grain size (km2) to be predicted
   #   extent: Total area (km2)
   #   tolerance: Tolerance to be given in intergration - the smaller the number

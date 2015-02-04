@@ -13,7 +13,7 @@
 #   extent: Extent of study area (km2)
 #   tolerance: tolerance for integration. Lower numbers allow for greater
 #              accuracy but require longer processing times
-#   Model = "Thomas"
+#   model = "Thomas"
 #
 # Returns:
 #   optim.pars: list of parameters estimated from optimisation procedure
