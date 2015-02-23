@@ -1,17 +1,29 @@
 #' @title Ensemble modelling of multiple downscaling functions
 #' @name ensemble.downscale
 #' 
-#' @description Predict area of occupancy at fine grain sizes for multiple
-#'   downscaling methods using \code{\link{downscale}} and
-#'   \code{\link{predict.downscale}}. The mean predicted occupancies of all
+#' @description Predict area of occupancy at fine grain sizes for multiple 
+#'   downscaling methods using \code{\link{downscale}} and 
+#'   \code{\link{predict.downscale}}. The mean predicted occupancies of all 
 #'   models is then calculated.
-#' 
-#' @inheritParams downscale
-#' @param newdata vector of grain sizes (in same units as occupancy) for which
+#'   
+#' @param occupancy vector of observed area of occupancies in squared units 
+#'   (e.g. km^{2}).
+#' @param area vector of grain sizes (in same units as occupancy).
+#' @param extent total area in same units as occupancy (only required for 
+#'   \code{FNB} and \code{Thomas} models).
+#' @param tolerance_mod only applicable for the \code{Thomas} model. The
+#'   tolerance used during integration in the Thomas model during optimisation
+#'   of parameters. Lower numbers allow for greater accuracy but require longer 
+#'   processing times (default = \code{1e-6}).
+#' @param tolerance_pred only applicable for the \code{Thomas} model. The
+#'   tolerance used during the prediction stage.
+#' @param newdata vector of grain sizes (in same units as occupancy) for which 
 #'   area of occupancy will be predicted.
-#' @param models vector of chosen downscaling models Default \code{models =
-#'   "all"} runs all available models. See \code{\link{downscale}} for list of
+#' @param models vector of chosen downscaling models. Default \code{models = 
+#'   "all"} runs all available models. See \code{\link{downscale}} for list of 
 #'   available models.
+#' @param plot if \code{TRUE} predictions of all models are plotted against
+#'   grain size along with the mean of all models.
 #' @param verbose if \code{TRUE} prints updates on modelling status.
 #'   
 #' @details The function is a simple ensemble technique that runs all available
@@ -37,24 +49,45 @@
 #'   Can coarse-grain patterns in insect atlas data predict local occupancy?
 #'   \emph{Diversity and Distributions} 20, 895-907.
 #'   
-#' @examples some examples
+#' @example R/Examples/Examples.R
 #' 
-#' @export ensemble.downscale
+#' @method ensemble.dowmscale
+#' #@export ensemble.downscale
 
 
 ################################################################################
 # 
 # ensemble.downscale.R
-# Version 1.0
+# Version 1.1
 # 04/02/2015
 #
 # Updates:
+#   23/02/2015 different tolerances allowed for modelling and predicting
+#   05/02/2015 plot = TRUE argument added
+#   05/02/2015 improved warning control
 #
 # Ensemble modelling
 #
 # Args:
-# 
+#   occupancy: vector of observed area of occupancies in squared units (e.g.
+#              km^{2}).
+#   area: vector of grain sizes (in same units as occupancy).
+#   extent: total area in same units as occupancy tolerance_mod: The tolerance
+#           used during integration in the Thomas model during optimisation of
+#           parameters.
+#   tolerance_pred: The tolerance used during the prediction stage. 
+#   newdata: vector of grain sizes (in same units as occupancy) for which area 
+#            of occupancy will be predicted.
+#   models: vector of chosen downscaling models. Default models = "all" runs all
+#           available models.
+#   plot: if TRUE predictions of all models are plotted against grain size along
+#         with the mean of all models.
+#   verbose: if TRUE prints updates on modelling status.
 # Returns:
+#    a dataframe. The first column cell.area is the grain sizes used for 
+#    predictions. The final column Means are the mean predictions of all models
+#    for each grain size. Intermediate columns are the predicted occupancies for
+#    the selected downscaling models.
 #
 ################################################################################
 
@@ -62,8 +95,10 @@ ensemble.downscale <- function(occupancy,
                                area,
                                newdata,
                                extent,
-                               tolerance = 1e-6,
+                               tolerance_mod = 1e-6,
+                               tolerance_pred = 1e-6,
                                models = "all",
+                               plot = TRUE,
                                verbose = TRUE) {
   # error checking - model name is correct
   suppressWarnings(apply(as.data.frame(models), 1, function(x)
@@ -72,11 +107,17 @@ ensemble.downscale <- function(occupancy,
       stop("Model name invalid", call. = FALSE)
     }))
   
-  if (models == "all") {
-    model.list <- c("Nachman","PL","Logis","Poisson","NB",
-                    "GNB","INB","FNB","Thomas")
+  if (length(models) == 1) {
+    if (models == "all") {
+      model.list <- c("Nachman","PL","Logis","Poisson","NB",
+                      "GNB","INB","FNB","Thomas")
+    }
+    if (models != "all") {
+      stop("Only one model selected: ensemble modelling not applicable", 
+           call. = FALSE)
+    }
   }
-  if (models != "all") {
+  if (length(models) > 1) {
     model.list <- models
   }
   
@@ -98,11 +139,11 @@ ensemble.downscale <- function(occupancy,
                    area = area,
                    model = model.run,
                    extent = extent,
-                   tolerance = tolerance)
+                   tolerance = tolerance_mod)
     est<-predict.downscale(object = mod,
                            newdata = newdata,
                            extent = extent,
-                           tolerance = tolerance,
+                           tolerance = tolerance_pred,
                            plot = FALSE)
     all.predicted[, i + 1] <- est$predicted[, "Occupancy"]
     
@@ -113,6 +154,7 @@ ensemble.downscale <- function(occupancy,
   all.predicted$Means <- rowMeans(all.predicted[, -1], na.rm = TRUE)
   
   # plotting
+  if (plot == TRUE) {
   par.original <- par()
   par.original <- list(mfrow = par.original$mfrow, mar = par.original$mar)
   par(mfrow = c(3, ceiling(length(model.list) / 3)), mar = c(5, 5, 3, 1))
@@ -135,6 +177,7 @@ ensemble.downscale <- function(occupancy,
            type="b", lwd=2, col = "red")
   }
   par(mfrow = par.original$mfrow, mar = par.original$mar)
+  }
   
   return(all.predicted)
 }

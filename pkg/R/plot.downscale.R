@@ -5,8 +5,7 @@
 #' @param \dots arguments, including graphical parameters for plot.downscale,
 #'   passed to other methods.
 #' @rdname predict.downscale
-
-
+#' 
 
 ################################################################################
 # 
@@ -33,6 +32,7 @@ plot.downscale <- function(predict.object, ...) {
     stop("Input data not of class 'predict.downscale'")
   }
   
+  model.run <- predict.object$model
   observed <- predict.object$observed
   predicted <- predict.object$predicted
   

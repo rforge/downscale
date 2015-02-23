@@ -60,9 +60,13 @@
 #' @seealso See \code{\link{downscale}} for estimating parameters of a 
 #'   downscaling function from observed occupancies at coarse grain sizes
 #'   
-#' @examples some examples
+#' @example R/Examples/Examples.R
+#' 
+#' @method predict.downscale
 #' 
 #' @export predict.downscale
+#' 
+#' @exportClass predict.downscale
 
 
 ################################################################################

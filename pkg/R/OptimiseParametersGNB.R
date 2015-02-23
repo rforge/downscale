@@ -1,28 +1,25 @@
 ################################################################################
 # 
-# OptimiseParameters.R
+# OptimiseParametersGNB.R
 # Version 1.0
-# 28/01/2015
+# 05/02/2015
 #
-# Optimisation procedure of finding parameters that best fit observed data
+# Optimisation procedure of finding parameters that best fit observed data for
+# the generalised binomial model
 #
 # Args:
 #   Area: Vector of grain sizes for obsvered area of occupancies
 #   Observed: Vector of observed area of occupancies
-#   Model: which downscaling model to use. Choice of:
-#     Nachman   Nachman model
-#     PL        Power Law model
-#     Poisson   Poisson model
-#     NB        Negative binomial model
-#     GNB       Generalised negative binomial model
-#     INB       Improved negative binomial model
+#   model = "GNB"
 #
 # Returns:
 #   optim.pars: list of parameters estimated from optimisation procedure
 #
 ################################################################################
 
-OptimiseParameters <- function(area, observed, model) {
+OptimiseParametersGNB <- function(area, 
+                                  observed,
+                                  model = "GNB") {
   # Retrive residual function, downscaling function and starting parameters
   # for model of choice
   resid.fun <- getFunction(paste("Resid", model, sep = ""))
@@ -34,6 +31,8 @@ OptimiseParameters <- function(area, observed, model) {
                                      fn = resid.fun,
                                      area = area,
                                      observed = log(observed),
+                                     lower = c("C" = 0, "z" = -Inf, "k" = -Inf),
+                                     upper = c("C" = 1, "z" = Inf,"k" = Inf),
                                      control = minpack.lm::nls.lm.control(
                                        maxiter = 1000))
   optim.pars <- as.list(coef(optimisation))

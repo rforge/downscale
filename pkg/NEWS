@@ -1,5 +1,18 @@
 NEWS for downscale package
 
+Changes for 0.5
+---------------
+23/02/2015
+package.rd file updated
+ensemble - different tolerances allowed for modelling and predicting
+
+Changes for 0.4
+---------------
+05/02/2015
+plot=TRUE added to ensemble plotting
+optimisation of logistic model now includes lower bounds
+optimisation of GNB model now includes upper and lower bounds
+
 Changes for 0.3
 ---------------
 04/02/2015

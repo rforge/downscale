@@ -3,3 +3,5 @@
 export(downscale)
 export(ensemble.downscale)
 export(predict.downscale)
+exportClasses(downscale)
+exportClasses(predict.downscale)

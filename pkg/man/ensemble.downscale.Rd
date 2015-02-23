@@ -4,8 +4,9 @@
 \alias{ensemble.downscale}
 \title{Ensemble modelling of multiple downscaling functions}
 \usage{
-ensemble.downscale(occupancy, area, newdata, extent, tolerance = 1e-06,
-  models = "all", verbose = TRUE)
+\method{ensemble.dowmscale}{#}(occupancy, area, newdata, extent,
+  tolerance_mod = 1e-06, tolerance_pred = 1e-06, models = "all",
+  plot = TRUE, verbose = TRUE)
 }
 \arguments{
 \item{occupancy}{vector of observed area of occupancies in squared units
@@ -19,14 +20,20 @@ area of occupancy will be predicted.}
 \item{extent}{total area in same units as occupancy (only required for
 \code{FNB} and \code{Thomas} models).}
 
-\item{tolerance}{only applicable for the \code{Thomas} model. The tolerance
-  used during integration in the Thomas model during optimisation of
-  parameters. Lower numbers allow for greater accuracy but require longer
-  processing times (default = \code{1e-6}).}
+\item{tolerance_mod}{only applicable for the \code{Thomas} model. The
+tolerance used during integration in the Thomas model during optimisation
+of parameters. Lower numbers allow for greater accuracy but require longer
+processing times (default = \code{1e-6}).}
 
-\item{models}{vector of chosen downscaling models Default \code{models =
+\item{tolerance_pred}{only applicable for the \code{Thomas} model. The
+tolerance used during the prediction stage.}
+
+\item{models}{vector of chosen downscaling models. Default \code{models =
 "all"} runs all available models. See \code{\link{downscale}} for list of
 available models.}
+
+\item{plot}{if \code{TRUE} predictions of all models are plotted against
+grain size along with the mean of all models.}
 
 \item{verbose}{if \code{TRUE} prints updates on modelling status.}
 }
@@ -50,7 +57,41 @@ The function is a simple ensemble technique that runs all available
   all models.
 }
 \examples{
-some examples
+### Hypothetical species occupancy data
+occ <- c(0.16, 0.36, 0.59, 0.86)
+### cell areas (km2) for observed grain sizes of hypothetical species
+areas <- c(40, 160, 640, 2560)
+
+### Nachman model
+(nachman <- downscale(occupancy = occ, area = areas, model = "Nachman"))
+
+### Finite negative binomial model
+(fnb <- downscale(occupancy = occ, area = areas, model = "FNB", 
+                  extent = 256000))
+
+### Thomas model
+(thomas <- downscale(occupancy = occ, area = areas, model = "Thomas", 
+                     extent = 256000, tolerance = 1e-5))
+
+### grain sizes for prediction
+fine.areas <- c(1, 2.5, 5, 10, 20, 40, 160, 640, 2560)
+
+### model predictions
+predict(nachman, newdata = fine.areas, plot = TRUE)
+predict(fnb, newdata = fine.areas, plot = TRUE,
+        extent = 256000)
+predict(thomas, newdata = fine.areas, plot = TRUE, 
+        extent = 256000, tolerance = 1e-5)
+
+### ensemble modelling
+ensemble.downscale(occupancy = occ, 
+                   area = areas,
+                   newdata = fine.areas,
+                   extent = 256000,
+                   tolerance_mod = 1e-5,
+                   tolerance_pred = 1e-5,
+                   model = "all")
+
 }
 \author{
 Charles Marsh <\email{charliem2003@gmail.com}> with input from

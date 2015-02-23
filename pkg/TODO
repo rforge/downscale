@@ -1,5 +1,4 @@
 tutorial
-namespaces?
 
 help files:
 - downscale
@@ -11,6 +10,13 @@ help files:
     proper ordering with plot
 - ensemble.downscale
     examples
-- package helpfile
-    all of it
     
+scale of saturation
+scale of endemism
+
+proportion of occupancy
+tolerance
+logistic - lower limit of C = 0?
+
+error checking predict results - NAs, 0's, outliers, bigger values
+stop("Larger occupancies predicted at finer grains than larger grains. Try a lower tolerance value.")

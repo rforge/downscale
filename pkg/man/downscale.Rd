@@ -72,7 +72,7 @@ Nine downscaling models are available. \code{area} is the grain size
        (gamma(W + ((extent * k) / area)) * gamma(((extent * k) / area) - k)))
        }\cr
    \code{"Thomas"} \tab  \tab  Thomas model \tab see below\cr
- }
+   }
 
  The finite negative binomial model (\code{"FNB"}) incorporates several gamma
  functions. This may result in integers larger than is possible to store in
@@ -82,7 +82,41 @@ Nine downscaling models are available. \code{area} is the grain size
  For the Thomas model LOTS OF BORING STUFF HERE
 }
 \examples{
-some examples
+### Hypothetical species occupancy data
+occ <- c(0.16, 0.36, 0.59, 0.86)
+### cell areas (km2) for observed grain sizes of hypothetical species
+areas <- c(40, 160, 640, 2560)
+
+### Nachman model
+(nachman <- downscale(occupancy = occ, area = areas, model = "Nachman"))
+
+### Finite negative binomial model
+(fnb <- downscale(occupancy = occ, area = areas, model = "FNB", 
+                  extent = 256000))
+
+### Thomas model
+(thomas <- downscale(occupancy = occ, area = areas, model = "Thomas", 
+                     extent = 256000, tolerance = 1e-5))
+
+### grain sizes for prediction
+fine.areas <- c(1, 2.5, 5, 10, 20, 40, 160, 640, 2560)
+
+### model predictions
+predict(nachman, newdata = fine.areas, plot = TRUE)
+predict(fnb, newdata = fine.areas, plot = TRUE,
+        extent = 256000)
+predict(thomas, newdata = fine.areas, plot = TRUE, 
+        extent = 256000, tolerance = 1e-5)
+
+### ensemble modelling
+ensemble.downscale(occupancy = occ, 
+                   area = areas,
+                   newdata = fine.areas,
+                   extent = 256000,
+                   tolerance_mod = 1e-5,
+                   tolerance_pred = 1e-5,
+                   model = "all")
+
 }
 \author{
 Charles Marsh <\email{charliem2003@gmail.com}> with input from

@@ -47,7 +47,7 @@
 #'        (gamma(W + ((extent * k) / area)) * gamma(((extent * k) / area) - k)))
 #'        }\cr
 #'    \code{"Thomas"} \tab  \tab  Thomas model \tab see below\cr
-#'  }
+#'    }
 #'  
 #'  The finite negative binomial model (\code{"FNB"}) incorporates several gamma
 #'  functions. This may result in integers larger than is possible to store in 
@@ -84,9 +84,11 @@
 #'   smaller grain sizes using the estimated parameters from the downscale
 #'   output.
 #'   
-#' @examples some examples
-#' 
+#' @example R/Examples/Examples.R
+#'
 #' @export
+#' 
+#' @exportClass downscale
 
 ################################################################################
 # 
@@ -143,12 +145,34 @@ downscale <- function(occupancy, area, model, extent, tolerance = 1e-6) {
     optim.pars <- suppressWarnings(OptimiseParameters(area =
                                       input.data[!is.na(input.data[, "Occ"]),
                                                    "Cell.area"], 
-                                      Observed = 
+                                      observed = 
                                         input.data[!is.na(input.data[, "Occ"]),
                                                     "Occ"],
                                       model = model))
   }
 
+  if (model == "Logis") { 
+    optim.pars <- suppressWarnings(
+      OptimiseParametersLogis(area =
+                              input.data[!is.na(input.data[,"Occ"]),
+                                         "Cell.area"], 
+                            observed = 
+                              input.data[!is.na(input.data[,"Occ"]),
+                                         "Occ"],
+                            model = model))
+  }
+  
+  if (model == "GNB") { 
+    optim.pars <- suppressWarnings(
+      OptimiseParametersGNB(area =
+                                input.data[!is.na(input.data[,"Occ"]),
+                                           "Cell.area"], 
+                              observed = 
+                                input.data[!is.na(input.data[,"Occ"]),
+                                           "Occ"],
+                              model = model))
+  }
+  
   if (model == "FNB") { 
     optim.pars <- suppressWarnings(
       OptimiseParametersFNB(area =
@@ -171,7 +195,7 @@ downscale <- function(occupancy, area, model, extent, tolerance = 1e-6) {
                                             "Occ"],
                                extent = extent,
                                model = model,
-                               tolerance = 1e-6))
+                               tolerance = tolerance))
   }
   observed <- data.frame("Cell.area" = input.data[,"Cell.area"],
                          "Occupancy" = input.data[,"Occ"])
