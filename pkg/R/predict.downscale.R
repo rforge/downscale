@@ -18,8 +18,8 @@
 #'   used during integration in the Thomas model during optimisation of 
 #'   parameters. Lower numbers allow for greater accuracy but require longer 
 #'   processing times (default = \code{1e-6}).
-#' @param plot if \code{plot = TRUE} (default = \code{FALSE}) plots observed and
-#'   predicted occupancies against grain size on a log-log plot.
+#' @param plot if \code{plot = TRUE} (default = \code{FALSE}) plots observed
+#'   and predicted occupancies against grain size on a log-log plot.
 #'   
 #' @details The function takes the parameters for a downscaling model estimated 
 #'   through \code{\link{downscale}} and uses the model to predict area of 
@@ -108,7 +108,8 @@ predict.downscale <- function(object,
                               newdata, 
                               extent, 
                               tolerance = 1e-6, 
-                              plot = FALSE) {
+                              plot = FALSE,
+                              ...) {
   # error checking
   if (class(object) != "downscale"){
     stop("Input data not of class 'downscale'")

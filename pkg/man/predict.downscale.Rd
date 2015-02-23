@@ -27,8 +27,8 @@ used during integration in the Thomas model during optimisation of
 parameters. Lower numbers allow for greater accuracy but require longer
 processing times (default = \code{1e-6}).}
 
-\item{plot}{if \code{plot = TRUE} (default = \code{FALSE}) plots observed and
-  predicted occupancies against grain size on a log-log plot.}
+\item{plot}{if \code{plot = TRUE} (default = \code{FALSE}) plots observed
+  and predicted occupancies against grain size on a log-log plot.}
 
 \item{\dots}{arguments, including graphical parameters for plot.downscale,
 passed to other methods.}
