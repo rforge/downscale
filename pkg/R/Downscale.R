@@ -1,102 +1,11 @@
-#' Model area of occupancy against grain size for downscaling
-#' 
-#' @aliases downscale
-#' 
-#' @description The function fits the log observed area of occupancy against 
-#'   grain size for coarse-scale data (typically atlas data) for nine commonly
-#'   used downscaling models (see Azaele et al. 2012 and Barwell et al. 2014).
-#'   The parameters of the fitted models may then be used to estimate the area
-#'   of occupancy at finer grain sizes than the observed data using 
-#'   \code{\link{predict.downscale}}.
-#'   
-#' @param occupancy vector of observed area of occupancies in squared units
-#'   (e.g. km^{2}).
-#' @param area vector of grain sizes (in same units as occupancy).
-#' @param model selected downscaling model, chosen from one of \code{"Nachman"},
-#'   \code{"PL"}, \code{"Logis"}, \code{"Poisson"}, \code{"NB"}, \code{"GNB"},
-#'   \code{"INB"}, \code{"FNB"}, \code{"Thomas"}. See \code{Details} below for
-#'   model descriptions.
-#' @param extent total area in same units as occupancy (only required for 
-#'   \code{FNB} and \code{Thomas} models).
-#' @param tolerance only applicable for the \code{Thomas} model. The tolerance 
-#'   used during integration in the Thomas model during optimisation of 
-#'   parameters. Lower numbers allow for greater accuracy but require longer 
-#'   processing times (default = \code{1e-6}).
-#'   
-#' @details Nine downscaling models are available. \code{area} is the grain size
-#'   and \code{extent} the total area in the same units:
-#'  \tabular{llll}{
-#'    \code{"Nachman"} \tab  \tab Nachman model \tab 
-#'      \emph{log(1 - exp(-C * area ^ z))}\cr
-#'    \code{"PL"} \tab  \tab  Power law model \tab 
-#'      \emph{log(C * area ^ z)}\cr
-#'    \code{"Logis"} \tab  \tab  Logistic model \tab 
-#'      \emph{log((C * (area ^ z)) / (1 + (C * (area ^ z))))}\cr
-#'    \code{"Poisson"} \tab  \tab  Poisson model \tab 
-#'      \emph{log(1 - (exp(-lambda * area)))}\cr
-#'    \code{"NB"} \tab  \tab  Negative binomial model \tab 
-#'      \emph{log(1 - (1 + (C * area) / k) ^ -k)}\cr
-#'    \code{"GNB"} \tab  \tab  Generalised negative binomial model \tab 
-#'      \emph{log(1 - (1 + (C * area ^ z) / k) ^ -k)}\cr
-#'    \code{"INB"} \tab  \tab  Improved negative binomial model \tab 
-#'      \emph{log(1 - ((C * area ^ (b - 1)) ^ ((r * area) / 
-#'        (1 - C * area ^ (b - 1)))))}\cr
-#'    \code{"FNB"} \tab  \tab  Finite negative binomial model \tab 
-#'      \emph{log(1 - 
-#'        ((gamma(W + ((extent * k) / area) - k) * gamma(extent * k) / area) /
-#'        (gamma(W + ((extent * k) / area)) * gamma(((extent * k) / area) - k)))
-#'        }\cr
-#'    \code{"Thomas"} \tab  \tab  Thomas model \tab see below\cr
-#'    }
-#'  
-#'  The finite negative binomial model (\code{"FNB"}) incorporates several gamma
-#'  functions. This may result in integers larger than is possible to store in 
-#'  R. Therefore multiple precision floating point numbers (\code{\link{mpfr}}
-#'  function in package \pkg{Rmpfr}) are used to make calculations possible.
-#'  
-#'  For the Thomas model LOTS OF BORING STUFF HERE
-#'   
-#' @return \code{downscale} returns an object of class "downscale" containing
-#'   three objects:
-#'   \item{model}{Downscaling model selected.} 
-#'   \item{pars}{Estimated parameters for the downscaling model.}
-#'    \item{observed}{Data frame containing two columns: 
-#'    \tabular{lll}{
-#'      \code{Cell.area} \tab  \tab Grain sizes for which occupancy have been
-#'        observed\cr 
-#'      \code{Occupancy} \tab  \tab Observed area of occupancy for each grain 
-#'        size\cr
-#'      }
-#'    }
-#'   
-#' @author Charles Marsh <\email{charliem2003@@gmail.com}> with input from
-#'   Louise Barwell.
-#'   
-#' @references Azaele, S., Cornell, S.J., & Kunin, W.E. (2012). Downscaling
-#'   species occupancy from coarse spatial scales. \emph{Ecological
-#'   Applications} 22, 1004-1014.
-#' @references Barwell, L.J., Azaele, S., Kunin, W.E., & Isaac, N.J.B. (2014).
-#'   Can coarse-grain patterns in insect atlas data predict local occupancy?
-#'   \emph{Diversity and Distributions} 20, 895-907.
-#'   
-#' @seealso The function output may be used as the input for
-#'   \code{\link{predict.downscale}} for extrapolating downscaling functions to
-#'   smaller grain sizes using the estimated parameters from the downscale
-#'   output.
-#'   
-#' @example R/Examples/Examples.R
-#'
-#' @export
-#' 
-#' @exportClass downscale
-
 ################################################################################
 # 
 # downscale.R
-# Version 1.3
-# 02/02/2015
+# Version 1.4
+# 08/05/2015
 #
 # Updates:
+#   08/05/2015: extent now required
 #   03/02/2015: output defined as class 'downscale'
 #   03/02/2015: observed data included in output
 #   02/02/2015: help file updated
@@ -106,13 +15,13 @@
 # Model area of occupancy against grain size for downscaling. 
 #
 # Args:
-#   occupancy: Vector of observed area of occupancies
-#   area: Vector of grain sizes for observed area of occupancies (eg km2)
+#   occupancies: data frame of observed area of occupancies and cell areas, or 
+#                object from upgrain
 #   model: function to use
-#   extent: total area (same units as area)- required only for FNB and Thomas
-#           models
+#   extent: total area (same units as area)
 #   tolerance: tolerance for integration of Thomas model. Lower numbers allow 
 #              for greater accuracy but require longer processing times
+#   starting_params: optional list of parameter values
 #
 # Returns:
 #   list of three objects of class 'downscale'
@@ -123,20 +32,55 @@
 #
 ################################################################################
 
-downscale <- function(occupancy, area, model, extent, tolerance = 1e-6) {
-  input.data <- DataInput(occupancy = occupancy, area = area, extent = extent)
-  model <- model
+downscale <- function(occupancies,
+                      model,
+                      extent = NULL,
+                      tolerance = 1e-6,
+                      starting_params = NULL) {
+  if(class(occupancies) == "upgrain") {
+    extent <- occupancies$extent.stand
+    occupancies <- occupancies$occupancy.stand[, -2]
+  }
+  
+  if(class(occupancies) != "upgrain") {
+    # error checking - input data frame correct
+    if(ncol(occupancies) != 2) {
+      stop("Input data must be a data frame with two columns (cell area and 
+           occupancy")
+    }
+    
+    # error checking - extent required
+    if(is.null(extent)) {
+      stop("Total extent required")
+    }
+    
+    # error checking - extent larger than largest grain size
+    if(extent < max(occupancies[, 2])) {
+      stop("Total extent is smaller than the largest grain size! Are the units correct?")
+    }
+    
+    # error checking - occupancies are between 0 and 1
+    if(min(occupancies[, 2]) < 0) {
+      stop("Occupancies must be proportion of cells occupied (values must be
+           between 0 - 1)")
+    }
+    if(max(occupancies[, 2]) > 1) {
+      stop("Occupancies must be proportion of cells occupied (values must be
+           between 0 - 1)")
+    }
+  }
+  
   # error checking - model name is correct
   if (model %in% c("Nachman", "PL", "Logis", "Poisson", "NB", "GNB", "INB",
                    "FNB", "Thomas") == FALSE) {
     stop("Model name invalid", call. = FALSE)
   }
   
-  # error checking - extent is bigger than largest grain size
-  if ((model == "FNB") | (model == "Thomas")){
-    if (max(area, na.rm = TRUE) > extent) {
-      stop("Largest grain size is greater than total extent", call. = FALSE)
-    }
+  input.data <- DataInput(occupancy = occupancies[, 2],
+                          area = occupancies[, 1])
+  model <- model
+  if(is.null(starting_params)) {
+    starting_params <- NULL
   }
   
   if ((model == "Nachman") | (model == "PL") | (model == "Logis") | 
@@ -148,7 +92,8 @@ downscale <- function(occupancy, area, model, extent, tolerance = 1e-6) {
                                       observed = 
                                         input.data[!is.na(input.data[, "Occ"]),
                                                     "Occ"],
-                                      model = model))
+                                      model = model,
+                                      starting.params = starting_params))
   }
 
   if (model == "Logis") { 
@@ -159,7 +104,8 @@ downscale <- function(occupancy, area, model, extent, tolerance = 1e-6) {
                             observed = 
                               input.data[!is.na(input.data[,"Occ"]),
                                          "Occ"],
-                            model = model))
+                            model = model,
+                            starting.params = starting_params))
   }
   
   if (model == "GNB") { 
@@ -170,7 +116,8 @@ downscale <- function(occupancy, area, model, extent, tolerance = 1e-6) {
                               observed = 
                                 input.data[!is.na(input.data[,"Occ"]),
                                            "Occ"],
-                              model = model))
+                              model = model,
+                            starting.params = starting_params))
   }
   
   if (model == "FNB") { 
@@ -182,7 +129,8 @@ downscale <- function(occupancy, area, model, extent, tolerance = 1e-6) {
                               input.data[!is.na(input.data[,"Occ"]),
                                          "Occ"],
                             extent = extent,
-                            model = model))
+                            model = model,
+                            starting.params = starting_params))
   }
 
   if (model == "Thomas") { 
@@ -195,13 +143,15 @@ downscale <- function(occupancy, area, model, extent, tolerance = 1e-6) {
                                             "Occ"],
                                extent = extent,
                                model = model,
-                               tolerance = tolerance))
+                               tolerance = tolerance,
+                               starting.params = starting_params))
   }
   observed <- data.frame("Cell.area" = input.data[,"Cell.area"],
                          "Occupancy" = input.data[,"Occ"])
   output <- list("model" = model,
                  "pars" = unlist(optim.pars),
-                 "observed" = observed)
+                 "observed" = observed,
+                 "extent" = extent)
   class(output) <- "downscale"
   return(output)
 }

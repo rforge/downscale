@@ -1,17 +1,18 @@
 ################################################################################
 # 
 # ResidFunctions.R
-# Version 1.1
-# 30/01/2015
+# Version 1.2
+# 13/04/2015
 #
 # Updates:
+#   13/04/2015: Hui model added
 #   30/01/2015: Thomas model added
 #
 # Functions for calculating the residuals between observed and expected area of
 # occupancy used in the optimisation procedure for parameter fitting to coarse
 # scale data.
 #
-# This file contains the 8 functions that are simple geometric extrapolations of
+# This file contains the 10 functions that are simple geometric extrapolations of
 # the area-occupancy relationship at coarse grain sizes:
 #   Nachman   Nachman model
 #   PL        Power Law model
@@ -22,6 +23,7 @@
 #   INB       Improved negative binomial model
 #   FNB       Finite negative binomial model
 #   Thomas    Thomas model
+#   Hui       Hui model
 #
 ################################################################################
 
@@ -141,3 +143,22 @@ ResidThomas <- function(par, observed, area, extent, tolerance = 1e-6) {
     PredictThomas(par, area, extent, tolerance = tolerance)
   return(resids)
 }
+
+### Hui model
+ResidHui <- function(p0_fine, n, q00, p0_coarse) {
+  # Calculates residual between observed and expected area of occupancy for 
+  # grain size A using the Thomas model
+  #
+  # Args:
+  #   p0_fine: probability of absence at fine grain - this is the unknown.
+  #   n: ratio between atlas grid size and fine grid size
+  #       eg. if atlas scale = 10km2, fine scale = 2km2, n = 5.
+  #   q00: the conditional probability that a randomly chosen cell adjacent to
+  #        an empty cell is occupied.
+  #   p0_coarse: observed probability of absence at coarse grain.
+  resids <- p0_coarse - prob_absence(p0_fine, n, q00, p0_coarse)
+  return(resids)
+}
+
+
+

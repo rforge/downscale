@@ -7,12 +7,11 @@
 # Formatting of input data
 #
 # cell size (same units) in km2 (not cell width)
-# extent - same units as cell size
 # occupancy - probability of occupancy - proportion of occupied cells
 #
 ################################################################################
 
-DataInput <- function(occupancy, area, extent) {
+DataInput <- function(occupancy, area) {
   
   ### error checking: Area same length as occupancy
   if (length(occupancy) != length(area)) {

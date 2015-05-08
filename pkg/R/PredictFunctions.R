@@ -132,8 +132,8 @@ PredictFNB <- function(par, area, extent){
   gamma3 <- par$W + ((extent * par$k) / area)
   gamma4 <- ((extent * par$k) / area) - par$k
   AOO <- suppressWarnings(as.numeric(log(1 - (
-    (gamma(Rmpfr::mpfr(gamma1, 128)) * gamma(Rmpfr::mpfr(gamma2, 128))) /
-      (gamma(Rmpfr::mpfr(gamma3, 128)) * gamma(Rmpfr::mpfr(gamma4, 128)))))))
+    (gamma(Rmpfr::mpfr(gamma1, 64)) * gamma(Rmpfr::mpfr(gamma2, 64))) /
+      (gamma(Rmpfr::mpfr(gamma3, 64)) * gamma(Rmpfr::mpfr(gamma4, 64)))))))
   return(AOO)
 }
 

@@ -22,12 +22,17 @@
 #
 ################################################################################
 
-OptimiseParameters <- function(area, observed, model) {
+OptimiseParameters <- function(area, observed, model, starting.params = NULL) {
   # Retrive residual function, downscaling function and starting parameters
   # for model of choice
   resid.fun <- getFunction(paste("Resid", model, sep = ""))
-  pred.fun <- getFunction(paste("Predict", model, sep = ""))  
-  starting.pars <- get(paste("Params", model, sep = ""))
+  pred.fun <- getFunction(paste("Predict", model, sep = ""))
+  if(is.null(starting.params)) {
+    starting.pars <- get(paste("Params", model, sep = ""))
+  }
+  if(!is.null(starting.params)) {
+    starting.pars <- starting.params
+  }
   
   # Optimisation procedure
   optimisation <- minpack.lm::nls.lm(par = starting.pars,
