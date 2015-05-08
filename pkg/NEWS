@@ -1,11 +1,14 @@
 NEWS for downscale package
 
-raster now depends
-predict different arguments
-can input parameters for donwscale
-more plotting arguments
-calculates AOO
-
+Changes for 1.0
+---------------
+08/05/2015
+Raster package now depends
+Argument names harmonised across functions
+Option to specify starting parameters
+More plotting arguments
+Calculates AOO as well as occupancy
+Upgraining vignette added
 
 Changes for 0.7
 ---------------
