@@ -92,11 +92,10 @@ For downscale modelling it is important they check their data for the scale of s
 
 \section{Package tutorial}
 
-First, we must download the downscale package from R-forge.
+First, we must download the downscale package from CRAN.
 
 <<downscale1, echo = TRUE, eval = FALSE, fig = FALSE, strip.white = false>>=
-install.packages("downscale",
-                 repos = "http://R-Forge.R-project.org")
+install.packages("downscale")
 @
 
 Then load in the library
