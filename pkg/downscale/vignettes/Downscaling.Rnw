@@ -528,7 +528,7 @@ ensemble.downscale(occupancy,
                                                      b = 0.1)))
 @
 
-If we want to compare occupancy between the two raster extents we must compare the converted area of occupancies (AOO), no proportion of occupancy (which are the proportions for different extents). In this case the estimates for grain sizes of 1 km and 10 km from the bounded rectangle (AOO = 627 $km^{2}$ and 3052 $km^{2}$) are larger than the estimates using the full mainland UK (AOO = 556 km^{2} and 2635 km^{2}) highlighting the importance of this decision.
+If we want to compare occupancy between the two raster extents we must compare the converted area of occupancies (AOO), no proportion of occupancy (which are the proportions for different extents). In this case the estimates for grain sizes of 1 km and 10 km from the bounded rectangle (AOO = 627 $km^{2}$ and 3052 $km^{2}$) are larger than the estimates using the full mainland UK (AOO = 556 $km^{2}$ and 2635 $km^{2}$) highlighting the importance of this decision.
 
 \section{Bibliography}
 
