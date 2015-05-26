@@ -84,10 +84,10 @@ atlas.data <- read.table(data.file, header = TRUE)
 head(atlas.data)
 
 ## explore thresholds using upgrain.threshold
-thresh <- upgrain.threshold(atlas.data = atlas.data,
-                            cell.width = 10,
-                            scales = 3,
-                            thresholds = seq(0, 1, 0.01))
+\donttest{thresh <- upgrain.threshold(atlas.data = atlas.data,
+                                      cell.width = 10,
+                                      scales = 3,
+                                      thresholds = seq(0, 1, 0.01))}
 
 ## use a specified threshold - method must equal NULL
 upgrain(atlas.data = atlas.data,
@@ -97,18 +97,18 @@ upgrain(atlas.data = atlas.data,
         method = NULL)
         
 ## use one of the suggested methods - threshold must equal NULL
-gain_equal_loss <- upgrain(atlas.data = atlas.data,
-                           cell.width= 10,
-                           scales = 3,
-                           threshold = NULL,
-                           method = "Gain_Equals_Loss")
+all_sampled <- upgrain(atlas.data = atlas.data,
+                       cell.width= 10,
+                       scales = 3,
+                       threshold = NULL,
+                       method = "All_Sampled")
         
 
-## input data for downscale for Gain Equals Loss threshold
-gain_equal_loss$occupancy.stand
+## input data for downscale for All Sampled threshold
+all_sampled$occupancy.stand
 
 ## and the original occupancies (note that extent varies with scale)
-gain_equal_loss$occupancy.orig
+all_sampled$occupancy.orig
 }
 \author{
 Charles Marsh <\email{charliem2003@gmail.com}>

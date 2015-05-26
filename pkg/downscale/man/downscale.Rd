@@ -114,16 +114,16 @@ atlas.data <- read.table(data.file, header = TRUE)
 head(atlas.data)
 
 ## explore thresholds using upgrain.threshold
-thresh <- upgrain.threshold(atlas.data = atlas.data,
-                            cell.width = 10,
-                            scales = 3,
-                            thresholds = seq(0, 1, 0.01))
+\dontrun{thresh <- upgrain.threshold(atlas.data = atlas.data,
+                                     cell.width = 10,
+                                     scales = 3,
+                                     thresholds = seq(0, 1, 0.01))}
 
-## upgrain data (using All Presences threshold)
+## upgrain data (using All Sampled threshold)
 occupancy <- upgrain(atlas.data,
                      cell.width = 10,
                      scales = 3,
-                     method = "All_Presences")
+                     method = "All_Sampled")
 
 ## Logistic model
 (logis <- downscale(occupancies = occupancy,

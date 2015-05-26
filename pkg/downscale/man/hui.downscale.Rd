@@ -69,11 +69,11 @@ head(atlas.data)
                       plot = TRUE))
 
 ## Fit Hui model to standardised atlas data for comparison with other models
-## First, upgrain data (using All Presences threshold)
+## First, upgrain data (using All Sampled threshold)
 occupancy <- upgrain(atlas.data,
                      cell.width = 10,
                      scales = 3,
-                     method = "All_Presences")
+                     method = "All_Sampled")
                      
 ## the "upgrain" object can be used as input for the Hui model
 (hui.stand <- hui.downscale(occupancy,
