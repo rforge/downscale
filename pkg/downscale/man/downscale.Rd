@@ -114,7 +114,7 @@ atlas.data <- read.table(data.file, header = TRUE)
 head(atlas.data)
 
 ## explore thresholds using upgrain.threshold
-\dontrun{thresh <- upgrain.threshold(atlas.data = atlas.data,
+\donttest{thresh <- upgrain.threshold(atlas.data = atlas.data,
                                      cell.width = 10,
                                      scales = 3,
                                      thresholds = seq(0, 1, 0.01))}
