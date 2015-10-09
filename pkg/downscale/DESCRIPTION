@@ -13,7 +13,7 @@ Imports:
     Rmpfr,
     cubature,
     sp
-Suggests: spocc
+Suggests: spocc, spoccutils
 LazyData: true
 Collate: 
     'DataInput.R'
