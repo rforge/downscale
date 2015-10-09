@@ -2,7 +2,7 @@
 \alias{predict.downscale}
 \title{Predict occupancy at fine grain sizes}
 \usage{
-\method{predict}{downscale}(object, new.areas, tolerance = 1e-6, plot = FALSE, ...)
+\method{predict}{downscale}(object, new.areas, tolerance = 1e-6, plot = TRUE, ...)
 }
 \arguments{
 \item{object}{a fitted object of class \code{'downscale'}.}
@@ -15,7 +15,7 @@ area of occupancy will be predicted.}
   parameters. Lower numbers allow for greater accuracy but require longer
   processing times (default = \code{1e-6}).}
 
-\item{plot}{if \code{plot = TRUE} (default = \code{FALSE}) plots observed
+\item{plot}{if \code{plot = TRUE} (default) plots observed
   and predicted occupancies against grain size on a log-log plot using 
   \code{\link{plot.predict.downscale}}.}
 
@@ -27,18 +27,18 @@ area of occupancy will be predicted.}
    \item{model}{Downscaling model used.}
    \item{predicted}{Data frame containing two columns:
    \tabular{lll}{
-     \code{Cell.area} \tab  \tab Grain sizes for which occupancy have been
+     \code{Cell.area} \tab  \tab Grain sizes for which occupancies have been
        estimated\cr
      \code{Occupancy} \tab  \tab Predicted proportion of occupancy for each grain
        size\cr
-     \code{AOO} \tab  \tab Predicted area of occupancy (proportion of area occupancy multiplied by extent\cr
+     \code{AOO} \tab  \tab Predicted area of occupancy (proportion of area occupancy multiplied by extent)\cr
      }
    }
    \item{observed}{Data frame containing two columns:
    \tabular{lll}{
-     \code{Cell.area} \tab  \tab Grain sizes for which occupancy have been
+     \code{Cell.area} \tab  \tab Grain sizes for which occupancies have been
        observed\cr
-     \code{Occupancy} \tab  \tab Observed area of occupancy for each grain
+     \code{Occupancy} \tab  \tab Observed proportion of occupancy for each grain
        size\cr
      }
    }
@@ -65,10 +65,10 @@ atlas.data <- read.table(data.file, header = TRUE)
 head(atlas.data)
 
 ## explore thresholds using upgrain.threshold
-\donttest{thresh <- upgrain.threshold(atlas.data = atlas.data,
-                                     cell.width = 10,
-                                     scales = 3,
-                                     thresholds = seq(0, 1, 0.01))}
+thresh <- upgrain.threshold(atlas.data = atlas.data,
+                            cell.width = 10,
+                            scales = 3,
+                            thresholds = seq(0, 1, 0.1))
 
 ## upgrain data (using All Sampled threshold)
 occupancy <- upgrain(atlas.data,
@@ -82,7 +82,8 @@ occupancy <- upgrain(atlas.data,
 
 ## Predictions occupancy at finer scales
 logis.pred <- predict(logis,
-                      new.areas = c(1, 2, 5, 25, 100))
+                      new.areas = c(1, 2, 5, 25, 100),
+                      plot = FALSE)
 logis.pred
 plot(logis.pred)
 

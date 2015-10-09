@@ -1,8 +1,11 @@
 ################################################################################
 # 
 # DataInput.R
-# Version 1.0
-# 29/01/2015
+# Version 1.1
+# 06/10/2015
+#
+# Updates:
+#   06/10/2015: Bug in scale of endemism fixed
 #
 # Formatting of input data
 #
@@ -11,7 +14,7 @@
 #
 ################################################################################
 
-DataInput <- function(occupancy, area) {
+DataInput <- function(occupancy, area, extent) {
   
   ### error checking: Area same length as occupancy
   if (length(occupancy) != length(area)) {
@@ -39,8 +42,9 @@ DataInput <- function(occupancy, area) {
   }
   
   ### Scale of endemism
+  no_cells <- extent / observed[, "Cell.area"]
   endemism.point <- suppressWarnings(
-    min(which(observed[, "Occ"] == observed[, "Cell.area"])))
+    min(which(observed[, "Occ"] == (1 / no_cells))))
   if (endemism.point < length(observed[, "Occ"])) {
     observed[(endemism.point + 1):length(observed[, "Occ"]), "Occ"] <- NA
   }
@@ -50,7 +54,6 @@ DataInput <- function(occupancy, area) {
     stop("Not enough scales before scale of endemism for modelling",
          call. = FALSE)
   }
-  
   return(observed)
 }
 

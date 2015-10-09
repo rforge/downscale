@@ -28,7 +28,7 @@ Returns a list contatining two objects:
      \code{SampledIncluded} \tab  \tab Number of sampled cells included.\cr
      \code{UnsampledAdded} \tab  \tab Number of unsampled NoData cells added.\cr
      \code{Extent} \tab  \tab Total number of cells included.\cr
-     \code{PresencesExluded} \tab  \tab Number of cells with presence records excluded.\cr
+     \code{OccurrencesExluded} \tab  \tab Number of cells with presence records excluded.\cr
      }
 }
 }
@@ -46,14 +46,14 @@ In order to \code{\link{downscale}} we need to \code{\link{upgrain}} our atlas d
 
 Instead we must ensure the extent is constant across all scales by fixing the extent at all grain sizes to the extent of the largest grain size and convert our proportion of occupied cells back to area of occupancy by using the standardised extent (not the original atlas data extent).
 
-However, if we fix the extent there is trade-off between assigning large areas of unsampled areas as absence, and discarding sampled areas and known presences. The \code{upgrain.threshold} function allows visualisations of this trade-off at the atlas scale through four plots:
+However, if we fix the extent there is trade-off between assigning large areas of unsampled areas as absence, and discarding sampled areas and known Occurrences. The \code{upgrain.threshold} function allows visualisations of this trade-off at the atlas scale through four plots:
 
 \if{html}{
 \tabular{lll}{
 a) \tab \tab  The total standardised extent; \cr
 b) \tab \tab  The number of unsampled cells added and assigned as absences, and the number of sampled cells excluded and assigned as No Data; \cr
 c) \tab \tab  The proportion of the original atlas data retained; \cr
-d) \tab \tab  The proportion of known presences excluded. \cr
+d) \tab \tab  The proportion of known Occurrences excluded. \cr
 }
 }
 \if{latex}{
@@ -62,7 +62,7 @@ a) \tab \tab  The total standardised extent; \cr
 b) \tab \tab  The number of unsampled cells added and assigned as absences, \cr
    \tab \tab and the number of sampled cells excluded and assigned as No Data; \cr
 c) \tab \tab  The proportion of the original atlas data retained; \cr
-d) \tab \tab  The proportion of known presences excluded. \cr
+d) \tab \tab  The proportion of known Occurrences excluded. \cr
 }
 }
 The final choice of threshold is up to the user on a case-by-case basis but we propose four threshold criteria in this function:
@@ -77,7 +77,7 @@ The final choice of threshold is up to the user on a case-by-case basis but we p
 }
 \if{latex}{\figure{Threshold.png}{options: width=10cm}}
 
-The function also creates maps for each of these four thresholds. In the example case this clearly demonstrates the trade-off between generating assumptions about unsampled areas, and losing data (and presences) for the sampled atlas data.
+The function also creates maps for each of these four thresholds. In the example case this clearly demonstrates the trade-off between generating assumptions about unsampled areas, and losing data (and Occurrences) for the sampled atlas data.
 
 \if{html}{\figure{Maps.png}{options: width="100\%" alt="Figure: Maps.png"}}
 \if{latex}{\figure{Maps.png}{options: width=13cm}}

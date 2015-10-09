@@ -92,38 +92,29 @@ atlas.data <- read.table(data.file, header = TRUE)
 ## and "presence"
 head(atlas.data)
 
-## upgrain data (using All Presences threshold)
+## upgrain data (using All Samples threshold)
 occupancy <- upgrain(atlas.data,
                      cell.width = 10,
                      scales = 3,
-                     method = "All_Presences")
+                     method = "All_Sampled")
 
 ## ensemble downscaling with an object of class upgrain
-\donttest{ensemble.downscale(occupancies = occupancy,
+ensemble.downscale(occupancies = occupancy,
                    new.areas = c(1, 2, 5, 15, 50, 100, 400, 1600, 6400),
                    cell.width = 10,
                    models = c("Nachman", "PL", "Logis", "GNB", "FNB", "Hui"),
-                   plot = TRUE)}
-
-## With all models:
-## tolerance of the Thomas model has been specified to increase processing time
-\donttest{ensemble.downscale(occupancies = occupancy,
-                   new.areas = c(1, 2, 5, 15, 50, 100, 400, 1600, 6400),
-                   cell.width = 10,
-                   models = "all",
-                   tolerance_mod = 1e-3,
-                   plot = TRUE)}
+                   plot = TRUE)
 
 ## Specifying starting parameters for Nachman and GNB models
 new.params <- list(Nachman = list("C" = 0.1, "z" = 0.01),
                    GNB = list("C" = 0.1, "z" = 1, "k" = 0.01))
                    
-\donttest{ensemble.downscale(occupancies = occupancy,
+ensemble.downscale(occupancies = occupancy,
                    new.areas = c(1, 2, 5, 15, 50, 100, 400, 1600, 6400),
                    cell.width = 10,
                    models = c("Nachman", "PL", "Logis", "GNB", "FNB", "Hui"),
                    starting_params = new.params,
-                   plot = TRUE)}
+                   plot = TRUE)
                    
 ## ensemble modelling with data frame of occupancies (not applicable for Hui
 ## model) with hypothetical species occupancy data
@@ -131,11 +122,11 @@ occupancy.dd <- data.frame(Cell.areas = c(100, 400, 1600, 6400),
                            Occupancy = c(0.16, 0.36, 0.59, 0.86))
 
 ## now extent must be specified (but cell.width not needed)
-\donttest{ensemble.downscale(occupancies = occupancy.dd,
+ensemble.downscale(occupancies = occupancy.dd,
                    new.areas = c(1, 2, 5, 15, 50, 100, 400, 1600, 6400),
                    extent = 384000,
                    models = c("Nachman", "PL", "Logis", "GNB", "FNB"),
-                   plot = TRUE)}
+                   plot = TRUE)
 }
 \author{
 Charles Marsh <\email{charliem2003@gmail.com}> with input from

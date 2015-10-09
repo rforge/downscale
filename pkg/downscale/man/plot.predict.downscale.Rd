@@ -26,11 +26,11 @@ A simple plotting function of \code{predict.downscale} objects. Occupancy is plo
 data.file <- system.file("extdata", "atlas_data.txt", package = "downscale")
 atlas.data <- read.table(data.file, header = TRUE)
 
-## upgrain data (using All Presences threshold)
+## upgrain data (using All Occurrences threshold)
 occupancy <- upgrain(atlas.data,
                      cell.width = 10,
                      scales = 3,
-                     method = "All_Presences")
+                     method = "All_Occurrences")
 
 ## Logistic model
 logis <- downscale(occupancies = occupancy,
@@ -47,7 +47,7 @@ plot(logis.pred)
 plot(logis.pred,
      col.obs = "blue",
      pch = 16,
-     ylim = c(0.07, 0.7))
+     ylim = c(0.01, 0.7))
 }
 \author{
 Charles Marsh <\email{charliem2003@gmail.com}>.

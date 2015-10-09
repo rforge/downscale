@@ -39,7 +39,7 @@ model descriptions.}
   \item{extent}{Only for \code{FNB} and \code{Thomas} models.}
 }
 \description{
-Fits the log observed proportion of occupancies against grain size for coarse-scale data (typically atlas data) for nine commonly used downscaling models (see Azaele et al. 2012 and Barwell et al. 2014). See \code{\link{hui.downscale}} for downscaling using the Hui model. The parameters of the fitted models may then be used to estimate the area of occupancy at finer grain sizes than the observed data using \code{\link{predict.downscale}}. Presence-absence atlas data can be prepared for downscaling using \code{\link{upgrain}}.
+Fits the log observed proportion of occupancies against log grain size (cell area) for coarse-scale data (typically atlas data) for nine commonly used downscaling models (see Azaele et al. 2012 and Barwell et al. 2014). See \code{\link{hui.downscale}} for downscaling using the Hui model. The parameters of the fitted models may then be used to estimate the area of occupancy at finer grain sizes than the observed data using \code{\link{predict.downscale}}. Presence-absence atlas data can be prepared for downscaling using \code{\link{upgrain}}.
 }
 \details{
 Nine downscaling models are available. \code{area} is the grain size (cell area) and \code{extent} the total area in the same units:
@@ -101,7 +101,7 @@ The optimisation procedure requires initial starting values for all model parame
 }
 \if{latex}{\figure{Params.png}{options: width=7cm}}
 
-NOTE: for downscaling it is important to set occupancies above the scale of saturation (the grain size at which all cells are occupied) and the scale of saturation (the grain size where only a single cell is occupied) are not included for modelling. The \code{downscale} functions will automatically set these occupancies to NA.
+NOTE: for downscaling it is important that occupancies above the scale of saturation (the grain size at which all cells are occupied) and the scale of saturation (the grain size where only a single cell is occupied) are not included for modelling. The \code{downscale} functions will automatically set these occupancies to NA.
 }
  
 \examples{
@@ -114,10 +114,10 @@ atlas.data <- read.table(data.file, header = TRUE)
 head(atlas.data)
 
 ## explore thresholds using upgrain.threshold
-\donttest{thresh <- upgrain.threshold(atlas.data = atlas.data,
-                                     cell.width = 10,
-                                     scales = 3,
-                                     thresholds = seq(0, 1, 0.01))}
+thresh <- upgrain.threshold(atlas.data = atlas.data,
+                            cell.width = 10,
+                            scales = 3,
+                            thresholds = seq(0, 1, 0.1))
 
 ## upgrain data (using All Sampled threshold)
 occupancy <- upgrain(atlas.data,
@@ -128,6 +128,13 @@ occupancy <- upgrain(atlas.data,
 ## Logistic model
 (logis <- downscale(occupancies = occupancy,
                     model = "Logis"))
+                    
+### predict occupancy at finer grain sizes
+pred <- predict(logis,
+                new.areas = c(1, 2, 5, 25, 100, 400, 1600, 6400))
+                
+### Plot predictions
+plot(pred)
 
 ## Improved Negative Binomial model
 (inb <- downscale(occupancies = occupancy,

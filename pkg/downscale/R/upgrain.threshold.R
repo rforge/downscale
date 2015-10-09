@@ -1,8 +1,12 @@
 ################################################################################
 #
-#upgrain.threshold.R Version 1.0 24/04/2015
+# upgrain.threshold.R 
+# Version 1.1
+# 05/10/2015
 #
-#Updates:
+# Updates:
+#   05/10/2015: Bug on number of scales fixed
+#               'All_Presences' changed to 'All_occurrences'
 #
 # Explores the NoData threshold selection of cell selection for upgraining. A 
 # threshold of 0 means that all cells at the largest grain with some Sampled 
@@ -45,6 +49,13 @@ upgrain.threshold <- function(atlas.data,
   }
   if(max(thresholds) != 1){
     stop("Threshold values must be between and include 0 and 1")
+  }
+  
+  ### Error checking: if data frame needs cell width
+  if(is.data.frame(atlas.data) == "TRUE") {
+    if(is.null(cell.width)) {
+      stop("If data is data.frame cell.width is required")
+    }
   }
   
   ### data manipulation
@@ -101,25 +112,25 @@ upgrain.threshold <- function(atlas.data,
                      SampledIncluded = NA,
                      UnsampledAdded = NA, 
                      Extent = NA,
-                     PresencesExcluded = NA)
+                     OccurrencesExcluded = NA)
+  
+  atlas_raster_extend <- raster::extend(atlas_raster, 
+                                        raster::extent(max_raster))
+  atlas_boundary <- atlas_raster_extend
+  atlas_boundary@data@values[atlas_boundary@data@values == 0] <- 1
+  atlas_boundary@data@values[is.na(atlas_boundary@data@values)] <- 0
+  
   for(j in 1:length(thresholds)){
-    max_raster_thresh <- max_raster
-    max_raster_thresh@data@values[boundary_raster@data@values <
-                                    thresholds[j]] <- NA
-    max_raster_thresh <- raster::disaggregate(max_raster_thresh, 8, fun = max)
-    
-    atlas_boundary <- atlas_raster
-    atlas_boundary@data@values[atlas_boundary@data@values == 0] <- 1
-    atlas_boundary@data@values[is.na(atlas_boundary@data@values)] <- 0
-    atlas_boundary <- raster::extend(atlas_boundary, 
-                                     raster::extent(max_raster_thresh))
-    
-    atlas_boundary_thresh <- max_raster_thresh
+    atlas_boundary_thresh <- max_raster
+    atlas_boundary_thresh@data@values[boundary_raster@data@values <
+                                        thresholds[j]] <- NA
     atlas_boundary_thresh@data@values[atlas_boundary_thresh@data@values >=
                                         0] <- 2
     atlas_boundary_thresh@data@values[is.na(
-                                      atlas_boundary_thresh@data@values)] <- 0
-    
+      atlas_boundary_thresh@data@values)] <- 0
+    atlas_boundary_thresh <- raster::disaggregate(atlas_boundary_thresh,
+                                                  (2 ^ scales),
+                                                  fun = max)
     both <- raster::overlay(atlas_boundary_thresh, atlas_boundary, fun = sum)
     land[j, "SampledExcluded"] <- sum(both@data@values == 1, na.rm = TRUE)
     land[j, "UnsampledAdded"] <- sum(both@data@values == 2, na.rm = TRUE)
@@ -127,20 +138,18 @@ upgrain.threshold <- function(atlas.data,
     land[j, "Extent"] <- sum(atlas_boundary_thresh@data@values == 2, 
                              na.rm = TRUE)
     
-    atlas_raster_extend <- raster::extend(atlas_raster, 
-                                          raster::extent(max_raster_thresh))
     both <- raster::overlay(atlas_boundary_thresh, atlas_raster_extend,
                             fun = sum)
-    land[j, "PresencesExcluded"] <- round(sum(both@data@values == 1, 
-                                             na.rm = TRUE) /
-                                           sum(atlas_raster@data@values == 1,
-                                               na.rm = TRUE), 3)
+    land[j, "OccurrencesExcluded"] <- round(sum(both@data@values == 1, 
+                                                na.rm = TRUE) /
+                                              sum(atlas_raster@data@values == 1,
+                                                  na.rm = TRUE), 3)
   }
   ### Possible Thresholds
   Gain_loss.thresh <- thresholds[which.min(abs(land[, "Extent"] - 
                                                  sum(atlas_boundary@data@values,
                                                      na.rm = TRUE)))]
-  Presence.thresh <- thresholds[max(which(land[, "PresencesExcluded"] == 0))]
+  Presence.thresh <- thresholds[max(which(land[, "OccurrencesExcluded"] == 0))]
   
   ### Plotting
   par.original <- par()
@@ -207,16 +216,16 @@ upgrain.threshold <- function(atlas.data,
   
   # Plot 4: % of presence cells exluded
   plot(land[, "Threshold"],
-       land[, "PresencesExcluded"],
+       land[, "OccurrencesExcluded"],
        type = "l",
-       ylab="Prop. of presences excluded",
+       ylab="Prop. of Occurrences excluded",
        xlab="Threshold",
        ylim = c(0, 1))
   lines(c(Gain_loss.thresh, Gain_loss.thresh),
-        c(1, land[thresholds == Gain_loss.thresh, "PresencesExcluded"]),
+        c(1, land[thresholds == Gain_loss.thresh, "OccurrencesExcluded"]),
         lty = 2, col = "red")
   lines(c(Presence.thresh, Presence.thresh),
-        c(1, land[thresholds == Presence.thresh, "PresencesExcluded"]),
+        c(1, land[thresholds == Presence.thresh, "OccurrencesExcluded"]),
         lty = 2, col = "blue")
   
   ### Maps of thresholds options
@@ -266,9 +275,9 @@ upgrain.threshold <- function(atlas.data,
                                  "SampledIncluded"] / 
                               max(land[, "SampledIncluded"], na.rm = TRUE), 3),
                       "\n",
-                      "Prop. presences excluded = ", 
+                      "Prop. Occurrences excluded = ", 
                       round(land[land[ ,1] == thresh.selection[j],
-                                 "PresencesExcluded"], 2),
+                                 "OccurrencesExcluded"], 2),
                       "\n",
                       "Sampled cells excuded = ", 
                       land[land[, 1] == thresh.selection[j], "SampledExcluded"],

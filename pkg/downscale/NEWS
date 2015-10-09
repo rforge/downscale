@@ -2,6 +2,15 @@ NEWS for downscale package
 
 Changes for 1.0
 ---------------
+09/10/2015
+upgrain and upgrain.threshold: 'All Presences' changed to 'All_Occurrences'
+upgrain and upgrain.threshold: bugs fixed when selecting number of scales
+upgrain: plotting now optional
+DataInput: bug in scale of endemism corrected
+Vignettes updated
+
+Changes for 1.0
+---------------
 18/05/2015
 plot and predict changed to s3 methods
 help files and examples updated

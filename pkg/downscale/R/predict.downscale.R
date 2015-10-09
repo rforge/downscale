@@ -37,7 +37,7 @@
 predict.downscale <- function(object, 
                               new.areas, 
                               tolerance = 1e-6, 
-                              plot = FALSE,
+                              plot = TRUE,
                               ...) {
   mod.fit <- object
   # error checking

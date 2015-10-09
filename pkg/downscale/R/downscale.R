@@ -68,7 +68,7 @@ downscale <- function(occupancies,
       stop("Occupancies must be proportion of cells occupied (values must be
            between 0 - 1)")
     }
-    }
+  }
   
   # error checking - model name is correct
   if (model %in% c("Nachman", "PL", "Logis", "Poisson", "NB", "GNB", "INB",
@@ -77,15 +77,16 @@ downscale <- function(occupancies,
   }
   
   input.data <- DataInput(occupancy = occupancies[, 2],
-                          area = occupancies[, 1])
+                          area = occupancies[, 1],
+                          extent = extent)
   model <- model
   if(is.null(starting_params)) {
     starting_params <- NULL
   }
   
   if ((model == "Nachman") | (model == "PL") | (model == "Logis") | 
-        (model == "Poisson") | (model == "NB") | (model == "GNB") | 
-        (model == "INB")){
+      (model == "Poisson") | (model == "NB") | (model == "GNB") | 
+      (model == "INB")){
     optim.pars <- suppressWarnings(OptimiseParameters(area =
                                                         input.data[!is.na(input.data[, "Occ"]),
                                                                    "Cell.area"], 
@@ -154,4 +155,4 @@ downscale <- function(occupancies,
                  "extent" = extent)
   class(output) <- "downscale"
   return(output)
-    }
+}

@@ -8,7 +8,7 @@
 #   05/05/2014: calculates AOO
 #               Can use upgrain as an input
 # 
-# Functions to calulcate q++ - the conditional probability that a randomly
+# Functions to calculate q++ - the conditional probability that a randomly
 # chosen cell adjacent to an occupied cell is also occupied
 #
 # Args:
@@ -50,6 +50,13 @@ hui.downscale <- function(atlas.data,
   
   if((class(atlas.data) != "RasterLayer") & (class(atlas.data) != "upgrain")) {
     species <- atlas.data
+  }
+  
+  # error checking: if data frame requires extent
+  if((class(atlas.data) != "RasterLayer") & (class(atlas.data) != "upgrain")) {
+    if(is.null(extent)) {
+      stop("Extent required if data input is data frame of coordinates")
+    }
   }
   
   # error checking that it's presence-absence data

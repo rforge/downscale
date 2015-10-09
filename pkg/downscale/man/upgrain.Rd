@@ -3,7 +3,7 @@
 \title{Upgraining of atlas data to larger grain sizes}
 \usage{
 upgrain(atlas.data, cell.width = NULL, scales, threshold = NULL,
-        method = "Gain_Equals_Loss")
+        method = "Gain_Equals_Loss", plot = TRUE)
 }
 \arguments{
 \item{atlas.data}{either a raster file of presence-absence atlas data or a
@@ -18,8 +18,9 @@ If data is a raster then leave as default (\code{= NULL})}
 
 \item{threshold}{default = \code{NULL}. A user defined threshold for the proportion of unsampled atlas cells allowed within a cell at the largest grain size. Note: if a \code{method} is selected then threshold must be \code{NULL}.}
 
-\item{method}{one of \code{"All_Sampled"}, \code{"All_Presences"}, \code{"Gain_Equals_Loss"} or \code{"Sampled_Only"} (default = \code{"Gain_Equals_Loss"}). If the user wishes to define their own \code{threshold} then method must equal \code{NULL}. See \code{details} and \code{\link{upgrain.threshold}} for descriptions of the different methods.
-}
+\item{method}{one of \code{"All_Sampled"}, \code{"All_Occurrences"}, \code{"Gain_Equals_Loss"} or \code{"Sampled_Only"} (default = \code{"Gain_Equals_Loss"}). If the user wishes to define their own \code{threshold} then method must equal \code{NULL}. See \code{details} and \code{\link{upgrain.threshold}} for descriptions of the different methods.}
+
+\item{plot}{default = \code{TRUE}. Plots the original atlas data alongside the standardised atlas data at each grain size.}
 }
 
 \value{
@@ -84,10 +85,10 @@ atlas.data <- read.table(data.file, header = TRUE)
 head(atlas.data)
 
 ## explore thresholds using upgrain.threshold
-\donttest{thresh <- upgrain.threshold(atlas.data = atlas.data,
-                                      cell.width = 10,
-                                      scales = 3,
-                                      thresholds = seq(0, 1, 0.01))}
+thresh <- upgrain.threshold(atlas.data = atlas.data,
+                            cell.width = 10,
+                            scales = 3,
+                            thresholds = seq(0, 1, 0.1))
 
 ## use a specified threshold - method must equal NULL
 upgrain(atlas.data = atlas.data,
@@ -96,11 +97,10 @@ upgrain(atlas.data = atlas.data,
         threshold = 0.15,
         method = NULL)
         
-## use one of the suggested methods - threshold must equal NULL
+## use one of the suggested methods - do not specify a threshold
 all_sampled <- upgrain(atlas.data = atlas.data,
                        cell.width= 10,
                        scales = 3,
-                       threshold = NULL,
                        method = "All_Sampled")
         
 
