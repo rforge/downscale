@@ -16,7 +16,8 @@ Imports:
     Rcpp,
     minpack.lm,
     cubature,
-    gmp
+    gmp,
+    rgeos
 Suggests: spocc, spoccutils
 LazyData: true
 Collate: 
