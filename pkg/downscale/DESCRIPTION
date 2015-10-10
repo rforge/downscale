@@ -13,7 +13,8 @@ Imports:
     minpack.lm,
     Rmpfr,
     cubature,
-    sp
+    sp,
+    Rcpp
 Suggests: spocc, spoccutils
 LazyData: true
 Collate: 
