@@ -8,8 +8,9 @@ Maintainer: Charles Marsh <charliem2003@gmail.com>
 Description: A set of functions that downscales species occupancy at
     coarse grain sizes to predict species occupancy at fine grain sizes.
 License: GPL-2
-Depends: raster, minpack.lm
 Imports: 
+    raster,
+    minpack.lm,
     Rmpfr,
     cubature,
     sp
