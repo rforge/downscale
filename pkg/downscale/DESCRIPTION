@@ -12,9 +12,11 @@ Imports:
     raster,
     minpack.lm,
     Rmpfr,
-    cubature,
     sp,
-    Rcpp
+    Rcpp,
+    minpack.lm,
+    cubature,
+    gmp
 Suggests: spocc, spoccutils
 LazyData: true
 Collate: 
