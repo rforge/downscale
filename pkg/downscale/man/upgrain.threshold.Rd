@@ -95,7 +95,7 @@ head(atlas.data)
 thresh <- upgrain.threshold(atlas.data = atlas.data,
                             cell.width = 10,
                             scales = 3,
-                            thresholds = seq(0, 1, 0.01))
+                            thresholds = seq(0, 1, 0.02))
 
 ## the four optional thresholds
 thresh$Thresholds

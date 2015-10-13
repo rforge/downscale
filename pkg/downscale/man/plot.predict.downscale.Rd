@@ -30,7 +30,8 @@ atlas.data <- read.table(data.file, header = TRUE)
 occupancy <- upgrain(atlas.data,
                      cell.width = 10,
                      scales = 3,
-                     method = "All_Occurrences")
+                     method = "All_Occurrences",
+                     plot = FALSE)
 
 ## Logistic model
 logis <- downscale(occupancies = occupancy,

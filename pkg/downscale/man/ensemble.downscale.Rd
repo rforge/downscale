@@ -96,7 +96,8 @@ head(atlas.data)
 occupancy <- upgrain(atlas.data,
                      cell.width = 10,
                      scales = 3,
-                     method = "All_Sampled")
+                     method = "All_Sampled",
+                     plot = FALSE)
 
 ## ensemble downscaling with an object of class upgrain
 ensemble.downscale(occupancies = occupancy,
@@ -105,17 +106,6 @@ ensemble.downscale(occupancies = occupancy,
                    models = c("Nachman", "PL", "Logis", "GNB", "FNB", "Hui"),
                    plot = TRUE)
 
-## Specifying starting parameters for Nachman and GNB models
-new.params <- list(Nachman = list("C" = 0.1, "z" = 0.01),
-                   GNB = list("C" = 0.1, "z" = 1, "k" = 0.01))
-                   
-ensemble.downscale(occupancies = occupancy,
-                   new.areas = c(1, 2, 5, 15, 50, 100, 400, 1600, 6400),
-                   cell.width = 10,
-                   models = c("Nachman", "PL", "Logis", "GNB", "FNB", "Hui"),
-                   starting_params = new.params,
-                   plot = TRUE)
-                   
 ## ensemble modelling with data frame of occupancies (not applicable for Hui
 ## model) with hypothetical species occupancy data
 occupancy.dd <- data.frame(Cell.areas = c(100, 400, 1600, 6400),
