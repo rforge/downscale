@@ -9,13 +9,17 @@ Description: A set of functions that downscales species occupancy at
     coarse grain sizes to predict species occupancy at fine grain sizes.
 License: GPL-2
 Depends:
-    raster (>= 2.4-20)
+    raster (>= 2.4-20),
+    R (>= 3.0.0)
 Imports:
     cubature (>= 1.1-2),
+    graphics,
+    grDevices,
     methods,
     minpack.lm (>= 1.1-9),
     Rmpfr (>= 0.5-7),
-    sp (>= 1.2-0)
+    sp (>= 1.2-0),
+    stats
 Suggests: 
     rgeos,
     spocc (>= 0.4.0), 
