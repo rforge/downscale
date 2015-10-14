@@ -2,7 +2,7 @@ Package: downscale
 Type: Package
 Title: Downscaling Species Occupancy
 Version: 0.1-0
-Date: 2015-13-10
+Date: 2015-10-13
 Author: Charles Marsh [aut, cre]
 Maintainer: Charles Marsh <charliem2003@gmail.com>
 Description: A set of functions that downscales species occupancy at
@@ -12,6 +12,7 @@ Depends:
     raster (>= 2.4-20)
 Imports:
     cubature (>= 1.1-2),
+    methods,
     minpack.lm (>= 1.1-9),
     Rmpfr (>= 0.5-7),
     sp (>= 1.2-0)
