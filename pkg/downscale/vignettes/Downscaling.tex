@@ -672,49 +672,50 @@ Hui model is running...  complete
 
 It may be that instead of having pre-existing atlas data, we may need to create our own coarse-scale data from point records (for example herbarium records or GBIF data).
 
-The grain size (cell width) needs to be carefully chosen so that we can best meet the assumption that all cells have been sampled. The larger the grain size the greater our confidence in each cell's status, but the further we will have to downscale and the fewer coarse-grain data points we will have for model fitting. If there are cells or regions where we do not expect this to be the case it may be best to change these to NA’s rather than assign them as absences.
+The grain size (cell width) needs to be carefully chosen so that we can best meet the assumption that all cells have been sampled. The larger the grain size the greater our confidence in each cell's status, but the further we will have to downscale and the fewer coarse-grain data points we will have for model fitting. If there are cells or regions where we do not expect this to be the case it may be best to change these to NAs rather than assign them as absences.
 
-The libraries \texttt{spocc} and \texttt{spoccutils} will automatically harvest GBIF data for a desired species for a specified region.
+The library \texttt{rgbif} will automatically harvest GBIF data for a desired species for a specified region.
 
 \begin{Schunk}
 \begin{Sinput}
 ## if you need to, install the packages
-install.packages("spocc")
-install.packages("spoccutils")
+install.packages("rgbif")
 
 ## load in the necessary libraries
-library(spoccutils)
-library(spocc)
+library(rgbif)
 library(downscale)
 \end{Sinput}
 \end{Schunk}
 
-We’ll get the UK records for the 
-pearl-bordered fritillary (\emph{Boloria euphrosyne}), a butterfly species with a patchy breeding distribution in the west of the UK. We confine ourselves to only UK records (\texttt{gbifopts = list(country = "GB")}) and limit ourselves to downloading no more than 10000 total records (\texttt{imit = 10000}).
+We’ll get the UK records for the chalkhill blue (\emph{Polyommatus coridon}), a butterfly species with a patchy breeding distribution largely in the south of the UK. We will confine ourselves to records only from the UK (\texttt{gbifopts = list(country = "GB")}).
 
 \begin{Schunk}
 \begin{Sinput}
-records <- occ(query = "Boloria euphrosyne",
-               from = "gbif",
-               limit = 10000,
-               gbifopts = list(country = "GB"))
+records <- occ_search(scientificName = "Polyommatus coridon",
+                      country = "GB",
+                      limit = 10000,
+                      hasCoordinate = TRUE,
+                      return = "data")
                
 ## extract just the coordinates of the occurrences
-records <- occ2sp(records,
-                  "+proj=longlat +datum=WGS84",
-                  just_coords = TRUE)
+records.coords <- SpatialPoints(data.frame(Lon = records$decimalLongitude,
+                                           Lat = records$decimalLatitude), 
+                                proj4string = CRS("+proj=longlat +datum=WGS84
+                                                   +ellps=WGS84"))
 \end{Sinput}
 \end{Schunk}
 
-The coordinates are in latitude/longitude based upon the WGS84 coordinate system. A lot of the point records are collected based upon the British National Grid ("OSGB 36"), so it makes sense to reproject the points to this coordinate system. As an added advantage we can also specify the units as km to make our upgraining easier.
+The coordinates are in latitude/longitude based upon the WGS84 coordinate system. However, a lot of the point records for UK butterflies are collected based upon the British National Grid ("OSGB 36"), which can be seen in the grid-like pattern of some of the points so it makes sense to reproject the points to this coordinate system. As an added advantage we can also specify the units as km to make our upgraining easier.
 
 \begin{Schunk}
 \begin{Sinput}
 ## reproject the coordinates to British National Grid
-records <- spTransform(records,
-                       CRS("+proj=lcc +lat_1=49.8333339 +lat_2=51.16666733333333
-                           +lat_0=90 +lon_0=4.367486666666666 +x_0=150000.01256 
-                           +y_0=5400088.4378 +ellps=intl +units=km +no_defs"))
+records.coords <- spTransform(records.coords,
+                              CRS("+proj=lcc 
+                                   +lat_1=49.8333339 +lat_2=51.16666733333333
+                                   +lat_0=90 +lon_0=4.367486666666666 
+                                   +x_0=150000.01256 +y_0=5400088.4378 
+                                   +ellps=intl +units=km +no_defs"))
 \end{Sinput}
 \end{Schunk}
 
@@ -722,8 +723,7 @@ We can have a quick look at the point records if we like.
 
 \begin{Schunk}
 \begin{Sinput}
-records.coords <- records@coords
-plot(records.coords, asp = 1)
+plot(records.coords, axes = T)
 \end{Sinput}
 \end{Schunk}
 
@@ -733,22 +733,26 @@ plot(records.coords, asp = 1)
 \end{figure}
 
 \newpage
-Now we have to convert these points in to a coarse-scale raster. The simplest method is to bound our raster by the limits of the location coordinates. Careful thought must also be put in to the grain size. It must be large enough that we are confident it is an accurate representation of presence-absence, but also small enough to allow upgraining to give at least three spatial scales worth of occupancy data. In the UK butterflies are generally sampled at a 10 km grid cell,so we'll set a grain size of 20 km width (400 km$^2$), which gives us a little mode certainty in our atlas data but will still comfortably allow us to upgrain to give three scales (400, 1600, 6400 km$^2$).
+Now we have to convert these points in to a coarse-scale raster. The simplest method is to bound our raster by the limits of the location coordinates. Careful thought must also be put in to the grain size. It must be large enough that we are confident it is an accurate representation of presence-absence, but also small enough to allow upgraining to give at least three spatial scales worth of occupancy data for fitting the downscaling models. In the UK butterflies are generally sampled at a 10 km grid cell, so we'll set a grain size of 20 km width (400 km$^2$), which gives us a little more certainty in our atlas data but will still comfortably allow us to upgrain to give three scales (400, 1600, 6400 km$^2$).
 
 \begin{Schunk}
 \begin{Sinput}
-# set grain size as 20 km
+## set grain size as 20 km
 cell.width <- 20
 
-## create a blank raster to fit the coordinates
-gbif_raster <- raster(xmn = min(records.coords[, "longitude"] - cell.width / 2),
-                      xmx = max(records.coords[, "longitude"] + cell.width / 2),
-                      ymn = min(records.coords[, "latitude"] - cell.width / 2),
-                      ymx = max(records.coords[, "latitude"] + cell.width / 2),
+# extract extent of coordinates
+coords.extent <- extent(records.coords)
+
+## create a blank raster to fit the coordinates (note the addition of half a 
+## cell width on all sides)
+gbif_raster <- raster(xmn = coords.extent@xmin - (cell.width / 2),
+                      xmx = coords.extent@xmax + (cell.width / 2),
+                      ymn = coords.extent@ymin - (cell.width / 2),
+                      ymx = coords.extent@ymax + (cell.width / 2),
                       res = cell.width)
                       
 ## assign cells with presence records as 1
-gbif_raster <- rasterize(records, gbif_raster, field = 1)
+gbif_raster <- rasterize(records.coords, gbif_raster, field = 1)
 
 ## convert cells with NA (no records) to 0
 gbif_raster[is.na(gbif_raster)] <- 0
@@ -780,7 +784,7 @@ We can see there has not been much increase in extent after upgraining:
 occupancy$occupancy.orig[1, 2]
 \end{Sinput}
 \begin{Soutput}
-[1] 147200
+[1] 163200
 
 \end{Soutput}
 \begin{Sinput}
@@ -788,7 +792,7 @@ occupancy$occupancy.orig[1, 2]
 occupancy$extent.stand
 \end{Sinput}
 \begin{Soutput}
-[1] 153600
+[1] 192000
 
 \end{Soutput}
 \end{Schunk}
@@ -869,12 +873,12 @@ ensemble$AOO[, c("Cell.area", "Means")]
 
 \begin{Soutput}
   Cell.area       Means
-1         1    761.4534
-2        10   4037.9311
-3       100  20763.4287
-4       400  51077.5494
-5      1600 108456.2328
-6      6400 183822.1933
+1         1    617.8954
+2        10   2966.7477
+3       100  13958.6322
+4       400  32781.6381
+5      1600  68197.5079
+6      6400 117253.2752
 \end{Soutput}
 \end{Schunk}
 
@@ -898,7 +902,7 @@ uk <- spTransform(uk,
 
 ## plot our GBIF records on top of the UK polygon
 plot(uk)
-plot(records, add = TRUE, col = "red)
+plot(records.coords, add = TRUE, col = "red)
 \end{Sinput}
 \end{Schunk}
 
@@ -917,7 +921,7 @@ gbif_raster <- raster(ext = extent(uk),
                       res = cell.width)
 
 ## assign cells with presence records as 1
-gbif_raster <- rasterize(records, gbif_raster, field = 1)
+gbif_raster <- rasterize(records.coords, gbif_raster, field = 1)
 
 ## convert cells with NA (no records) to 0
 gbif_raster[is.na(gbif_raster)] <- 0
@@ -998,7 +1002,7 @@ ensemble$AOO[, c("Cell.area", "Means")]
 \includegraphics[width=\linewidth]{Downscaling-downscale42}
 \end{figure}
 
-If we want to compare predicted occupancy between the two methods we must compare the converted area of occupancies (AOO), not the proportion of occupancies as these are calculated from different extents. In this case the estimates for grain sizes of 1 km and 10 km from the bounded rectangle (AOO = 761 km$^2$ and 4038 km$^2$) are quite a bit larger than the estimates using the full mainland UK (AOO = 665 km$^2$ and 3354 km$^2$), most likely as a lot of cells in the atlas generated by the bounded rectangle would actually be sea. This highlights the care that is needed in selecting the bounding extent, the method and number of scales to upgrain, and the grain size we wish to predict occupancy for.
+If we want to compare predicted occupancy between the two methods we must compare the converted area of occupancies (AOO), not the proportion of occupancies as these are calculated from different extents. In this case the estimates for grain sizes of 1 km and 10 km from the bounded rectangle (AOO = 618 km$^2$ and 2967 km$^2$) are quite a bit larger than the estimates using the full mainland UK (AOO = 556 km$^2$ and 2635 km$^2$), most likely as a lot of cells in the atlas generated by the bounded rectangle would actually be sea. This highlights the care that is needed in selecting the bounding extent, the method and number of scales to upgrain, and the grain size we wish to predict occupancy for.
 
 \section{Bibliography}
 
