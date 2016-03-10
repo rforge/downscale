@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.8.17)  9 MAR 2016 12:51
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.8.17)  10 MAR 2016 16:40
 entering extended mode
 **Downscaling.tex
 
@@ -445,7 +445,11 @@ LaTeX Info: Redefining \GenericError on input line 601.
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\multirow\multirow.sty"
 \bigstrutjot=\dimen115
 )
-(C:/PROGRA~1/R/R-32~1.1/share/texmf/tex/latex\Sweave.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\upquote\upquote.sty"
+Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
+tim
+)
+(C:/PROGRA~1/R/R-32~1.3/share/texmf/tex/latex\Sweave.sty
 Package: Sweave 
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ifthen.sty"
@@ -647,26 +651,26 @@ File: t1aer.fd 1997/11/16 Font definitions for T1/aer.
 ))))
 (D:\Documents\Leeds\EU-BON\Packages\downscale\pkg\downscale\vignettes\Downscali
 ng.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 26.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 26.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 27.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 27.
  ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ts1cmr.fd"
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    ... okay on input line 27.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -717,7 +721,7 @@ LaTeX Font Info:    ... okay on input line 26.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 \AtBeginShipoutBox=\box28
-Package hyperref Info: Link coloring OFF on input line 26.
+Package hyperref Info: Link coloring OFF on input line 27.
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
@@ -726,9 +730,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count120
 )
-LaTeX Info: Redefining \ref on input line 26.
-LaTeX Info: Redefining \pageref on input line 26.
-LaTeX Info: Redefining \nameref on input line 26.
+LaTeX Info: Redefining \ref on input line 27.
+LaTeX Info: Redefining \pageref on input line 27.
+LaTeX Info: Redefining \nameref on input line 27.
 
 (D:\Documents\Leeds\EU-BON\Packages\downscale\pkg\downscale\vignettes\Downscali
 ng.out)
@@ -741,11 +745,11 @@ ng-concordance.tex)
 (D:\Documents\Leeds\EU-BON\Packages\downscale\pkg\downscale\vignettes\Downscali
 ng-concordance.tex)
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 34.
+(Font)              <12> on input line 35.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 34.
+(Font)              <8> on input line 35.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 34.
+(Font)              <6> on input line 35.
 
 (D:\Documents\Leeds\EU-BON\Packages\downscale\pkg\downscale\vignettes\Downscali
 ng.toc
@@ -757,266 +761,286 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 \tf@toc=\write5
  [1
 
-{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}] [2]
-LaTeX Font Info:    Try loading font information for T1+aett on input line 48.
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
+<figures/Original_upgrain.png, id=61, 1192.455pt x 472.76625pt>
+File: figures/Original_upgrain.png Graphic file (type png)
 
+<use figures/Original_upgrain.png>
+Package pdftex.def Info: figures/Original_upgrain.png used on input line 48.
+(pdftex.def)             Requested size: 412.56496pt x 163.56621pt.
+
+Overfull \hbox (3.12979pt too wide) in paragraph at lines 48--49
+ [][] 
+ []
+
+LaTeX Font Info:    Try loading font information for T1+aett on input line 54.
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ae\t1aett.fd"
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
-)
-<figures/Flow.png, id=66, 485.11238pt x 618.20963pt>
-File: figures/Flow.png Graphic file (type png)
- <use figures/Flow.png>
-Package pdftex.def Info: figures/Flow.png used on input line 59.
-(pdftex.def)             Requested size: 281.6821pt x 358.97688pt.
-
-[3 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/figure
-s/Flow.png>]
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 70.
- <figures/Saturation.png, id=77, 509.80463pt x 209.583pt>
+) [2 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/figu
+res/Original_upgrain.png>] <figures/Saturation.png, id=71, 509.80463pt x 209.58
+3pt>
 File: figures/Saturation.png Graphic file (type png)
 
 <use figures/Saturation.png>
-Package pdftex.def Info: figures/Saturation.png used on input line 104.
+Package pdftex.def Info: figures/Saturation.png used on input line 66.
 (pdftex.def)             Requested size: 355.65944pt x 146.21779pt.
- [4 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/figur
-es/Saturation.png>] [5]
-<Downscaling-downscale6.png, id=94, 433.62pt x 433.62pt>
-File: Downscaling-downscale6.png Graphic file (type png)
+ [3 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/figur
+es/Saturation.png>]
+<figures/Flow.png, id=82, 485.11238pt x 618.20963pt>
+File: figures/Flow.png Graphic file (type png)
+ <use figures/Flow.png>
+Package pdftex.def Info: figures/Flow.png used on input line 85.
+(pdftex.def)             Requested size: 281.6821pt x 358.97688pt.
 
-<use Downscaling-downscale6.png>
-Package pdftex.def Info: Downscaling-downscale6.png used on input line 210.
-(pdftex.def)             Requested size: 256.0748pt x 256.085pt.
- [6 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/Downs
-caling-downscale6.png>] [7]
-<figures/Threshold_plots.png, id=105, 1003.75pt x 702.625pt>
-File: figures/Threshold_plots.png Graphic file (type png)
-
-<use figures/Threshold_plots.png>
-Package pdftex.def Info: figures/Threshold_plots.png used on input line 270.
-(pdftex.def)             Requested size: 355.65944pt x 248.96724pt.
-
-<figures/Threshold_maps.png, id=106, 861.2175pt x 797.98125pt>
-File: figures/Threshold_maps.png Graphic file (type png)
-
-<use figures/Threshold_maps.png>
-Package pdftex.def Info: figures/Threshold_maps.png used on input line 277.
-(pdftex.def)             Requested size: 341.43306pt x 316.36197pt.
- [8 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/figur
-es/Threshold_plots.png> <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downs
-cale/vignettes/figures/Threshold_maps.png>]
-<Downscaling-downscale11.png, id=113, 433.62pt x 433.62pt>
-File: Downscaling-downscale11.png Graphic file (type png)
-
-<use Downscaling-downscale11.png>
-Package pdftex.def Info: Downscaling-downscale11.png used on input line 306.
-(pdftex.def)             Requested size: 355.65944pt x 355.67656pt.
- [9 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/Downs
-caling-downscale11.png>] [10]
-<Downscaling-downscale13.pdf, id=123, 433.62pt x 433.62pt>
-File: Downscaling-downscale13.pdf Graphic file (type pdf)
-
-<use Downscaling-downscale13.pdf>
-Package pdftex.def Info: Downscaling-downscale13.pdf used on input line 390.
-(pdftex.def)             Requested size: 199.16928pt x 199.16988pt.
-
-<Downscaling-downscale14.png, id=124, 433.62pt x 433.62pt>
-File: Downscaling-downscale14.png Graphic file (type png)
-
-<use Downscaling-downscale14.png>
-Package pdftex.def Info: Downscaling-downscale14.png used on input line 391.
-(pdftex.def)             Requested size: 199.16928pt x 199.16988pt.
-
-<Downscaling-downscale16.png, id=125, 433.62pt x 433.62pt>
-File: Downscaling-downscale16.png Graphic file (type png)
-
-<use Downscaling-downscale16.png>
-Package pdftex.def Info: Downscaling-downscale16.png used on input line 418.
-(pdftex.def)             Requested size: 256.0748pt x 256.085pt.
- [11 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/Down
-scaling-downscale13.pdf> <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/down
-scale/vignettes/Downscaling-downscale14.png>]
-LaTeX Font Info:    Try loading font information for TS1+aett on input line 436
+[4 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/figure
+s/Flow.png>]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <9> on input line 96.
+ [5]
+LaTeX Font Info:    Try loading font information for TS1+aett on input line 164
 .
-
-(C:/PROGRA~1/R/R-32~1.1/share/texmf/tex/latex\ts1aett.fd
+ (C:/PROGRA~1/R/R-32~1.3/share/texmf/tex/latex\ts1aett.fd
 File: ts1aett.fd 
 )
-LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 436
+LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 164
 .
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ts1cmtt.fd"
 File: ts1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `TS1/aett/m/sl' in size <10> not available
-(Font)              Font shape `TS1/cmtt/m/sl' tried instead on input line 436.
+(Font)              Font shape `TS1/cmtt/m/sl' tried instead on input line 164.
+
+LaTeX Font Info:    Try loading font information for TS1+aer on input line 191.
 
 
-<Downscaling-downscale18.png, id=139, 433.62pt x 433.62pt>
+(C:/PROGRA~1/R/R-32~1.3/share/texmf/tex/latex\ts1aer.fd
+File: ts1aer.fd 
+)
+LaTeX Font Info:    Font shape `TS1/aer/m/n' in size <10> not available
+(Font)              Font shape `TS1/cmr/m/n' tried instead on input line 191.
+ [6]
+<Downscaling-downscale6.png, id=103, 433.62pt x 433.62pt>
+File: Downscaling-downscale6.png Graphic file (type png)
+
+<use Downscaling-downscale6.png>
+Package pdftex.def Info: Downscaling-downscale6.png used on input line 227.
+(pdftex.def)             Requested size: 256.0748pt x 256.085pt.
+ [7 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/Downs
+caling-downscale6.png>] [8]
+<figures/Threshold_plots.png, id=115, 1003.75pt x 702.625pt>
+File: figures/Threshold_plots.png Graphic file (type png)
+
+<use figures/Threshold_plots.png>
+Package pdftex.def Info: figures/Threshold_plots.png used on input line 284.
+(pdftex.def)             Requested size: 341.43306pt x 239.00726pt.
+
+<figures/Threshold_maps.png, id=116, 861.2175pt x 797.98125pt>
+File: figures/Threshold_maps.png Graphic file (type png)
+
+<use figures/Threshold_maps.png>
+Package pdftex.def Info: figures/Threshold_maps.png used on input line 291.
+(pdftex.def)             Requested size: 298.75394pt x 276.82585pt.
+ [9 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/figur
+es/Threshold_plots.png> <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downs
+cale/vignettes/figures/Threshold_maps.png>]
+<Downscaling-downscale11.png, id=123, 433.62pt x 433.62pt>
+File: Downscaling-downscale11.png Graphic file (type png)
+
+<use Downscaling-downscale11.png>
+Package pdftex.def Info: Downscaling-downscale11.png used on input line 320.
+(pdftex.def)             Requested size: 355.65944pt x 355.67656pt.
+ [10 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/Down
+scaling-downscale11.png>] [11]
+<Downscaling-downscale13.pdf, id=133, 433.62pt x 433.62pt>
+File: Downscaling-downscale13.pdf Graphic file (type pdf)
+
+<use Downscaling-downscale13.pdf>
+Package pdftex.def Info: Downscaling-downscale13.pdf used on input line 404.
+(pdftex.def)             Requested size: 199.16928pt x 199.16988pt.
+
+<Downscaling-downscale14.png, id=134, 433.62pt x 433.62pt>
+File: Downscaling-downscale14.png Graphic file (type png)
+
+<use Downscaling-downscale14.png>
+Package pdftex.def Info: Downscaling-downscale14.png used on input line 405.
+(pdftex.def)             Requested size: 199.16928pt x 199.16988pt.
+
+<Downscaling-downscale16.png, id=135, 433.62pt x 433.62pt>
+File: Downscaling-downscale16.png Graphic file (type png)
+
+<use Downscaling-downscale16.png>
+Package pdftex.def Info: Downscaling-downscale16.png used on input line 432.
+(pdftex.def)             Requested size: 256.0748pt x 256.085pt.
+ [12 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/Down
+scaling-downscale13.pdf> <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/down
+scale/vignettes/Downscaling-downscale14.png>]
+<Downscaling-downscale18.png, id=149, 433.62pt x 433.62pt>
 File: Downscaling-downscale18.png Graphic file (type png)
 
 <use Downscaling-downscale18.png>
-Package pdftex.def Info: Downscaling-downscale18.png used on input line 446.
+Package pdftex.def Info: Downscaling-downscale18.png used on input line 459.
 (pdftex.def)             Requested size: 199.16928pt x 199.16988pt.
 
-<Downscaling-downscale19.png, id=140, 602.25pt x 602.25pt>
+<Downscaling-downscale19.png, id=150, 602.25pt x 602.25pt>
 File: Downscaling-downscale19.png Graphic file (type png)
 
 <use Downscaling-downscale19.png>
-Package pdftex.def Info: Downscaling-downscale19.png used on input line 447.
+Package pdftex.def Info: Downscaling-downscale19.png used on input line 460.
 (pdftex.def)             Requested size: 199.16928pt x 199.16583pt.
- [12 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/Down
-scaling-downscale16.png>] [13 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg
+ [13 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/Down
+scaling-downscale16.png>] [14 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg
 /downscale/vignettes/Downscaling-downscale18.png> <D:/Documents/Leeds/EU-BON/Pa
 ckages/downscale/pkg/downscale/vignettes/Downscaling-downscale19.png>]
-<Downscaling-downscale.png, id=154, 433.62pt x 433.62pt>
+<Downscaling-downscale.png, id=163, 433.62pt x 433.62pt>
 File: Downscaling-downscale.png Graphic file (type png)
 
 <use Downscaling-downscale.png>
-Package pdftex.def Info: Downscaling-downscale.png used on input line 491.
+Package pdftex.def Info: Downscaling-downscale.png used on input line 504.
 (pdftex.def)             Requested size: 369.88582pt x 369.90204pt.
- [14 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/Down
+ [15 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/Down
 scaling-downscale.png>]
-<Downscaling-downscale23.png, id=160, 433.62pt x 433.62pt>
+<Downscaling-downscale23.png, id=169, 433.62pt x 433.62pt>
 File: Downscaling-downscale23.png Graphic file (type png)
 
 <use Downscaling-downscale23.png>
-Package pdftex.def Info: Downscaling-downscale23.png used on input line 573.
+Package pdftex.def Info: Downscaling-downscale23.png used on input line 586.
 (pdftex.def)             Requested size: 369.88582pt x 369.90204pt.
- [15]
-<Downscaling-downscale24.png, id=165, 903.375pt x 602.25pt>
+ [16]
+<Downscaling-downscale24.png, id=174, 903.375pt x 602.25pt>
 File: Downscaling-downscale24.png Graphic file (type png)
 
 <use Downscaling-downscale24.png>
-Package pdftex.def Info: Downscaling-downscale24.png used on input line 604.
+Package pdftex.def Info: Downscaling-downscale24.png used on input line 617.
 (pdftex.def)             Requested size: 409.43517pt x 272.95818pt.
- [16 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/Down
-scaling-downscale23.png>] [17 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg
+ [17 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/Down
+scaling-downscale23.png>] [18 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg
 /downscale/vignettes/Downscaling-downscale24.png>] <Downscaling-downscale26.png
-, id=176, 903.375pt x 602.25pt>
+, id=185, 903.375pt x 602.25pt>
 File: Downscaling-downscale26.png Graphic file (type png)
 
 <use Downscaling-downscale26.png>
-Package pdftex.def Info: Downscaling-downscale26.png used on input line 667.
+Package pdftex.def Info: Downscaling-downscale26.png used on input line 680.
 (pdftex.def)             Requested size: 409.43517pt x 272.95818pt.
- [18 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/Down
+ [19 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/Down
 scaling-downscale26.png>]
-<Downscaling-downscale30.png, id=182, 903.375pt x 803.0pt>
+<Downscaling-downscale30.png, id=192, 903.375pt x 803.0pt>
 File: Downscaling-downscale30.png Graphic file (type png)
 
 <use Downscaling-downscale30.png>
-Package pdftex.def Info: Downscaling-downscale30.png used on input line 732.
+Package pdftex.def Info: Downscaling-downscale30.png used on input line 745.
 (pdftex.def)             Requested size: 341.43306pt x 303.5013pt.
- [19] [20 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes
+ [20] [21 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes
 /Downscaling-downscale30.png>]
-<Downscaling-downscale32.png, id=194, 878.28125pt x 781.92125pt>
+<Downscaling-downscale32.png, id=203, 878.28125pt x 781.92125pt>
 File: Downscaling-downscale32.png Graphic file (type png)
 
 <use Downscaling-downscale32.png>
-Package pdftex.def Info: Downscaling-downscale32.png used on input line 766.
+Package pdftex.def Info: Downscaling-downscale32.png used on input line 779.
 (pdftex.def)             Requested size: 227.62204pt x 202.65045pt.
 
-<Downscaling-downscale33.png, id=195, 878.28125pt x 781.92125pt>
+<Downscaling-downscale33.png, id=204, 878.28125pt x 781.92125pt>
 File: Downscaling-downscale33.png Graphic file (type png)
 
 <use Downscaling-downscale33.png>
-Package pdftex.def Info: Downscaling-downscale33.png used on input line 802.
+Package pdftex.def Info: Downscaling-downscale33.png used on input line 815.
 (pdftex.def)             Requested size: 270.30118pt x 240.65114pt.
- [21 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/Down
+ [22 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/Down
 scaling-downscale32.png>]
 LaTeX Font Info:    Font shape `TS1/aett/m/n' in size <10> not available
-(Font)              Font shape `TS1/cmtt/m/n' tried instead on input line 829.
+(Font)              Font shape `TS1/cmtt/m/n' tried instead on input line 842.
 
-<Downscaling-downscale34.png, id=201, 903.375pt x 602.25pt>
+<Downscaling-downscale34.png, id=210, 903.375pt x 602.25pt>
 File: Downscaling-downscale34.png Graphic file (type png)
 
 <use Downscaling-downscale34.png>
-Package pdftex.def Info: Downscaling-downscale34.png used on input line 835.
+Package pdftex.def Info: Downscaling-downscale34.png used on input line 848.
 (pdftex.def)             Requested size: 409.43517pt x 272.95818pt.
- [22 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/Down
-scaling-downscale33.png>] [23 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg
+ [23 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/Down
+scaling-downscale33.png>] [24 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg
 /downscale/vignettes/Downscaling-downscale34.png>] <Downscaling-downscale36.png
-, id=213, 903.375pt x 602.25pt>
+, id=222, 903.375pt x 602.25pt>
 File: Downscaling-downscale36.png Graphic file (type png)
 
 <use Downscaling-downscale36.png>
-Package pdftex.def Info: Downscaling-downscale36.png used on input line 887.
+Package pdftex.def Info: Downscaling-downscale36.png used on input line 900.
 (pdftex.def)             Requested size: 409.43517pt x 272.95818pt.
 
-<Downscaling-downscale38.png, id=214, 878.28125pt x 781.92125pt>
+<Downscaling-downscale38.png, id=223, 878.28125pt x 781.92125pt>
 File: Downscaling-downscale38.png Graphic file (type png)
 
 <use Downscaling-downscale38.png>
-Package pdftex.def Info: Downscaling-downscale38.png used on input line 911.
+Package pdftex.def Info: Downscaling-downscale38.png used on input line 924.
 (pdftex.def)             Requested size: 284.52756pt x 253.31007pt.
- [24 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/Down
+ [25 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/Down
 scaling-downscale36.png>]
-<Downscaling-downscale40.png, id=220, 743.77875pt x 738.76pt>
+<Downscaling-downscale40.png, id=230, 743.77875pt x 738.76pt>
 File: Downscaling-downscale40.png Graphic file (type png)
 
 <use Downscaling-downscale40.png>
-Package pdftex.def Info: Downscaling-downscale40.png used on input line 940.
+Package pdftex.def Info: Downscaling-downscale40.png used on input line 953.
 (pdftex.def)             Requested size: 284.52756pt x 282.61423pt.
- [25 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/Down
+ [26 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/Down
 scaling-downscale38.png>]
-<Downscaling-downscale41.png, id=227, 877.2775pt x 781.92125pt>
+<Downscaling-downscale41.png, id=236, 877.2775pt x 781.92125pt>
 File: Downscaling-downscale41.png Graphic file (type png)
 
 <use Downscaling-downscale41.png>
-Package pdftex.def Info: Downscaling-downscale41.png used on input line 956.
+Package pdftex.def Info: Downscaling-downscale41.png used on input line 969.
 (pdftex.def)             Requested size: 270.30118pt x 240.92555pt.
- [26 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/Down
+ [27 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/Down
 scaling-downscale40.png> <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/down
 scale/vignettes/Downscaling-downscale41.png>]
-<Downscaling-downscale42.png, id=234, 903.375pt x 602.25pt>
+<Downscaling-downscale42.png, id=243, 903.375pt x 602.25pt>
 File: Downscaling-downscale42.png Graphic file (type png)
 
 <use Downscaling-downscale42.png>
-Package pdftex.def Info: Downscaling-downscale42.png used on input line 1002.
+Package pdftex.def Info: Downscaling-downscale42.png used on input line 1015.
 (pdftex.def)             Requested size: 409.43517pt x 272.95818pt.
- [27 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/Down
+ [28 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/Down
 scaling-downscale42.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1024.
- [28]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1024.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1037.
+ [29]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1037.
 
 (D:\Documents\Leeds\EU-BON\Packages\downscale\pkg\downscale\vignettes\Downscali
 ng.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1024.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1024.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1037.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1037.
 
 Package rerunfilecheck Info: File `Downscaling.out' has not changed.
 (rerunfilecheck)             Checksum: BE2FFE8B1D4C8DDDA1C98AD40393C38B;634.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1024.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1037.
  ) 
 Here is how much of TeX's memory you used:
- 7210 strings out of 493921
- 107973 string characters out of 3144870
- 190574 words of memory out of 3000000
- 10290 multiletter control sequences out of 15000+200000
- 36494 words of font info for 79 fonts, out of 3000000 for 9000
+ 7249 strings out of 493921
+ 108785 string characters out of 3144870
+ 188850 words of memory out of 3000000
+ 10318 multiletter control sequences out of 15000+200000
+ 36829 words of font info for 80 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 35i,10n,28p,1298b,472s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 35i,10n,28p,1304b,472s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Charlie\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi60
 0\tctt1000.pk> <C:\Users\Charlie\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknap
-pen\ec\dpi600\tcst1000.pk><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public
-/amsfonts/cm/cmbx10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/a
-msfonts/cm/cmbx12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/ams
-fonts/cm/cmbx9.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfon
-ts/cm/cmmi10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts
-/cm/cmr10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
-/cmr12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
-r17.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.
-pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb>
-<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsltt10.pfb>
-<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:
-/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Pr
-ogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Prog
-ram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Progra
-m Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on Downscaling.pdf (28 pages, 551115 bytes).
+pen\ec\dpi600\tcrm1000.pk> <C:\Users\Charlie\AppData\Local\MiKTeX\2.9\fonts\pk\
+ljfour\jknappen\ec\dpi600\tcst1000.pk><C:/Program Files (x86)/MiKTeX 2.9/fonts/
+type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/ty
+pe1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type
+1/public/amsfonts/cm/cmbx9.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/p
+ublic/amsfonts/cm/cmmi10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pub
+lic/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public
+/amsfonts/cm/cmr12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/am
+sfonts/cm/cmr17.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfo
+nts/cm/cmr7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmr9.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
+msltt10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
+msy7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy
+9.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.
+pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pf
+b><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
+Output written on Downscaling.pdf (29 pages, 564627 bytes).
 PDF statistics:
- 311 PDF objects out of 1000 (max. 8388607)
- 41 named destinations out of 1000 (max. 500000)
- 201 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 325 PDF objects out of 1000 (max. 8388607)
+ 43 named destinations out of 1000 (max. 500000)
+ 206 words of extra memory for PDF output out of 10000 (max. 10000000)
 

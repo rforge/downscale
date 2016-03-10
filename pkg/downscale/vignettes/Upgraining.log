@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.8.17)  9 OCT 2015 16:44
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.8.17)  10 MAR 2016 17:14
 entering extended mode
 **Upgraining.tex
 
@@ -418,7 +418,7 @@ Now handling font encoding PD1 ...
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ltxmisc\parskip.sty"
 Package: parskip 2001/04/09 non-zero parskip adjustments
 )
-(C:/PROGRA~1/R/R-32~1.1/share/texmf/tex/latex\Sweave.sty
+(C:/PROGRA~1/R/R-32~1.3/share/texmf/tex/latex\Sweave.sty
 Package: Sweave 
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ifthen.sty"
@@ -767,7 +767,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 100.
 
-Overfull \hbox (2.3989pt too wide) in paragraph at lines 100--113
+Overfull \hbox (11.59949pt too wide) in paragraph at lines 100--113
  [][] 
  []
 
@@ -778,7 +778,7 @@ File: figures/Threshold_maps.png Graphic file (type png)
 Package pdftex.def Info: figures/Threshold_maps.png used on input line 152.
 (pdftex.def)             Requested size: 409.43517pt x 379.37378pt.
  [4]
-<figures/Threshold_maps_2_scales.png, id=56, 861.2175pt x 797.98125pt>
+<figures/Threshold_maps_2_scales.png, id=55, 861.2175pt x 797.98125pt>
 File: figures/Threshold_maps_2_scales.png Graphic file (type png)
 
 <use figures/Threshold_maps_2_scales.png>
@@ -787,7 +787,7 @@ Package pdftex.def Info: figures/Threshold_maps_2_scales.png used on input line
 (pdftex.def)             Requested size: 409.43517pt x 379.37378pt.
  [5 <D:/Documents/Leeds/EU-BON/Packages/downscale/pkg/downscale/vignettes/figur
 es/Threshold_maps.png>]
-<figures/Threshold_maps_4_scales.png, id=63, 861.2175pt x 797.98125pt>
+<figures/Threshold_maps_4_scales.png, id=62, 861.2175pt x 797.98125pt>
 File: figures/Threshold_maps_4_scales.png Graphic file (type png)
 
 <use figures/Threshold_maps_4_scales.png>
@@ -821,7 +821,7 @@ Here is how much of TeX's memory you used:
  10041 multiletter control sequences out of 15000+200000
  19778 words of font info for 50 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 35i,9n,21p,1207b,319s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 35i,9n,21p,1231b,319s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb>
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:
 /Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Pr
@@ -829,9 +829,9 @@ ogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Progr
 am Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsltt10.pfb><C:/Progr
 am Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Program
  Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on Upgraining.pdf (7 pages, 198548 bytes).
+Output written on Upgraining.pdf (7 pages, 196436 bytes).
 PDF statistics:
- 105 PDF objects out of 1000 (max. 8388607)
+ 104 PDF objects out of 1000 (max. 8388607)
  15 named destinations out of 1000 (max. 500000)
  44 words of extra memory for PDF output out of 10000 (max. 10000000)
 
