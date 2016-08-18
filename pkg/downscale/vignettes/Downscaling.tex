@@ -335,7 +335,7 @@ $model
 [1] "INB"
 
 $pars
-         C          r          b 
+         C      gamma          b 
 1.42670491 0.04906771 1.82970792 
 
 $observed
@@ -364,11 +364,11 @@ The downscaling functions use an optimisation procedure to fit the models to the
 \texttt{Nachman}  &	\texttt{"C"} = 0.01       &	\texttt{"z"} = 0.01 & \\	
 \texttt{PL}       &	\texttt{"C"} = 0.01       &	\texttt{"z"} = 0.01 & \\
 \texttt{Logis}    &	\texttt{"C"} = 0.01       &	\texttt{"z"} = 0.01 & \\	
-\texttt{Poisson}  &	\texttt{"lambda"} = 1e-8  &  &	\\
-\texttt{NB}       &	\texttt{"C"} = 0.01       &	\texttt{"k"} = 0.01 & \\	
+\texttt{Poisson}  &	\texttt{"gamma"} = 1e-8  &  &	\\
+\texttt{NB}       &	\texttt{"gamma"} = 0.01       &	\texttt{"k"} = 0.01 & \\	
 \texttt{GNB}	    & \texttt{"C"} = 0.00001    &	\texttt{"z"} = 1    &	\texttt{"k"} = 0.01 \\
-\texttt{INB}	    & \texttt{"C"} = 1          &	\texttt{"r"} = 0.01 &	\texttt{"b"} = 0.1 \\
-\texttt{FNB}	    & \texttt{"W"} = 10         &	\texttt{"k"} = 10   & \\	
+\texttt{INB}	    & \texttt{"C"} = 1          &	\texttt{"gamma"} = 0.01 &	\texttt{"b"} = 0.1 \\
+\texttt{FNB}	    & \texttt{"N"} = 10         &	\texttt{"k"} = 10   & \\	
 \texttt{Thomas}   &	\texttt{"rho"} = 1e-8     &	\texttt{"mu"} = 10  &	\texttt{"sigma"} = 1 \\\hline
 \end{tabular}
 \label{table:pars}
@@ -379,7 +379,7 @@ If using your own parameters, they must be in the form of a list with the same p
 \begin{Schunk}
 \begin{Sinput}
 ## Specifying the starting parameters
-params.new <- list("C" = 0.1, "r" = 0.00001, "b" = 0.1)
+params.new <- list("C" = 0.1, "gamma" = 0.00001, "b" = 0.1)
 inb.new <- downscale(occupancies = occupancy,
                      model = "INB",
                      starting_params = params.new)
@@ -858,7 +858,7 @@ ensemble <- ensemble.downscale(occupancy,
                                new.areas = c(1, 10, 100, 400, 1600, 6400),
                                tolerance_mod = 1e-3,
                                starting_params = list(INB = list(C = 10, 
-                                                                 r = 0.01, 
+                                                                 gamma = 0.01, 
                                                                  b = 0.1)))
 \end{Sinput}
 \begin{Soutput}
@@ -977,7 +977,7 @@ ensemble <- ensemble.downscale(occupancy,
                                new.areas = c(1, 10, 100, 400, 1600, 6400),
                                tolerance_mod = 1e-3,
                                starting_params = list(INB = list(C = 10,
-                                                                 r = 0.01,
+                                                                 gamma = 0.01,
                                                                  b = 0.1)))
 \end{Sinput}
 \begin{Soutput}
