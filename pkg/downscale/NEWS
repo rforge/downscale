@@ -3,7 +3,7 @@ NEWS for downscale package
 Changes for 1.2-3
 ---------------
 29/09/2016
-No need to input cell width in hui.downscale with raster
+No need to input cell width in hui.downscale with raster or upgrain object
 
 Changes for 1.2-2
 ---------------
