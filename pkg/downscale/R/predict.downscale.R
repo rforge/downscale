@@ -96,10 +96,12 @@ predict.downscale <- function(object,
   }
   
   if(!is.na(sum(expected[, "Occupancy"]))) {
-    for(i in 1:(length(AOO) - 1)) {
-      if(AOO[i] > AOO[i + 1]) {
-        warning("Scaling is inconsistent: larger occupancies predicted at finer grain sizes.
+    if(length(AOO) > 1) {
+      for(i in 1:(length(AOO) - 1)) {
+        if(AOO[i] > AOO[i + 1]) {
+          warning("Scaling is inconsistent: larger occupancies predicted at finer grain sizes.
                \nIf model = Thomas try a smaller tolerance value (e.g. 1e-7)")
+        }
       }
     }
   }
