@@ -1,5 +1,10 @@
 NEWS for downscale package
 
+Changes for 1.2-4
+---------------
+24/11/2016
+Bug fixed with error checking in predict.downscale and ensemble.downscale
+
 Changes for 1.2-3
 ---------------
 29/09/2016
