@@ -68,27 +68,27 @@ For downscaling it is important to check the data for the scale of saturation an
 \label{fig:Saturation}
 \end{figure}
 
-\newpage
 \section{Using the downscale package}
 
 The general flow of the \texttt{downscale} package is presented in fig. \ref{fig:Flow}. The package is based around seven user functions:  \texttt{upgrain.threshold}, \texttt{upgrain}, \texttt{downscale}, \texttt{predict}, \texttt{hui.downscale}, \texttt{plot}, and \texttt{ensemble.downscale}. Ten downscaling models are available (Nachman, power law, logistic, poisson, negative binomial, generalised negative binomial, improved negative binomial, finite negative binomial, Thomas and Hui models). Details of all models can be found in the help files, and in the supplementary information of Barwell et al. 2014. 
 
-The user may input three types of data:
+The user may input four types of data:
 \begin{enumerate} \itemsep1pt \parskip0pt 
 \item [1)] A data frame with columns for grain sizes (cell area) and occupancies in that order;
-\item [2)] A data frame of cell coordinates and presence-absence data (presence = 1; absence = 0). Column names must be ``lon”, ``lat”, and ``presence” in that order;
+\item [2)] A data frame of cell coordinates and presence-absence data (presence = 1; absence = 0). Column names must be ``x”, ``y”, and ``presence” in that order;
 \item [3)] A raster layer of presence-absence data (presence = 1; absence = 0; no data = NA).
+\item [4)] A SpatialPointsDataFrame of cell coordinates along with a data frame of presence-absence data raster layer of presence-absence data (presence = 1; absence = 0; no data = NA).
 \end{enumerate}
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[width=9.9cm]{Flow.png}
-\caption{\textbf{Structure of the} \texttt{downscale} \textbf{package showing the flow between the seven functions (yellow) and the three output object classes (orange). Black arrows represent the input of raw data of three types: a raster layer of presence-absence data, a data frame of cell coordinates and presence-absence for each cell, and a data frame of occupancies at coarse-grain sizes. Yellow arrows are where the output of one function may be used as the input for the next function}}
+\includegraphics[width=12cm]{Flow.png}
+\caption{\textbf{Structure of the} \texttt{downscale} \textbf{package showing the flow between the seven functions (yellow) and the three output object classes (orange). Black arrows represent the input of raw data of three types: a raster layer of presence-absence data, a SpatialPointsDataFrame where the data are presence-absences, a data frame of cell coordinates and presence-absence for each cell, and a data frame of occupancies at coarse-grain sizes. Yellow arrows are where the output of one function may be used as the input for the next function}}
 \label{fig:Flow}
 \end{figure}
 
 \newpage
-To carry out downscaling with the Hui model (Hui et al. 2006, 2009) or upgraining of atlas data (and exploration of upgraining thresholds) then the input data must be of type 2 or 3. The table below shows the functions to use to achieve desired objectives with regards to input data. In all cases \texttt{upgrain.threshold} can be used to explore thresholds for \texttt{upgrain}.
+To carry out downscaling with the Hui model (Hui et al. 2006, 2009) or upgraining of atlas data (and exploration of upgraining thresholds) then the input data must be of type 2, 3 or 4. The table below shows the functions to use to achieve desired objectives with regards to input data. In all cases \texttt{upgrain.threshold} can be used to explore thresholds for \texttt{upgrain}.
 
 \begin{table}[th]
 \small
@@ -108,11 +108,18 @@ Raster layer of presence-       & Downscale            & $\texttt{upgrain} \Righ
 absence data                    & (excluding Hui model)& $\texttt{downscale} \Rightarrow$ \\
                                 &                      & $\texttt{predict} \Rightarrow$ \\
                                 &                      & $\texttt{plot}$ \\ \hline
+SpatialPointsDataFrame          & Downscale            & $\texttt{upgrain} \Rightarrow$ \\
+with presence-absence data      & (excluding Hui model)& $\texttt{downscale} \Rightarrow$ \\
+                                &                      & $\texttt{predict} \Rightarrow$ \\
+                                &                      & $\texttt{plot}$ \\ \hline
 Data frame of cell coordinates  & Downscale            & ($\texttt{upgrain} \Rightarrow$) \\
 and presence-absence data       &	(including Hui model)& $\texttt{hui.downscale} \Rightarrow$ \\
                                 &                      & $\texttt{plot}$ \\ \hline
 Raster layer of presence-       & Downscale            & ($\texttt{upgrain} \Rightarrow$) \\
 absence data                    &	(including Hui model)& $\texttt{hui.downscale} \Rightarrow$ \\
+                                &                      & $\texttt{plot}$ \\ \hline
+SpatialPointsDataFrame          & Downscale            & ($\texttt{upgrain} \Rightarrow$) \\
+with presence-absence data      &	(including Hui model)& $\texttt{hui.downscale} \Rightarrow$ \\
                                 &                      & $\texttt{plot}$ \\ \hline
 Data frame of cell areas        & Ensemble modelling   & $\texttt{ensemble.downscale}$ \\
 and occcupancies                &	(excluding Hui model)& \\ \hline	
@@ -120,7 +127,10 @@ Data frame of cell coordinates  & Ensemble modelling   & $\texttt{upgrain} \Righ
 and presence-absence data       &	(with or without Hui model)& $\texttt{ensemble.downscale}$ \\ \hline
 Raster layer of presence-       & Ensemble modelling   & $\texttt{upgrain} \Rightarrow$ \\
 absence data                    &	(with or without Hui model)& $\texttt{ensemble.downscale}$ \\ \hline
+SpatialPointsDataFrame          & Ensemble modelling   & $\texttt{upgrain} \Rightarrow$ \\
+with presence-absence data      &	(with or without Hui model)& $\texttt{ensemble.downscale}$ \\ \hline
 \end{tabular}
+\caption{\textbf{Flow of functions for downscaling with respect to the type of input data, and if the user wishes to apply the Hui model or not.}}
 \end{table}
 
 \newpage
@@ -239,14 +249,14 @@ atlas.data <- read.table(data.file, header = TRUE)
 \end{Sinput}
 \end{Schunk}
 
-The data frame must have the column names “lon”, “lat” and “presence”:
+The data frame must have the column names “x”, “y” and “presence”:
 
 \begin{Schunk}
 \begin{Sinput}
 head(atlas.data)
 \end{Sinput}
 \begin{Soutput}
-   lon lat presence
+     x   y presence
 1 8170  10        0
 2 8130  20        0
 3 8140  20        0

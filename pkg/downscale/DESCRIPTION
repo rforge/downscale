@@ -1,8 +1,8 @@
 Package: downscale
 Type: Package
 Title: Downscaling Species Occupancy
-Version: 1.2-4
-Date: 2016-11-24
+Version: 2.0-0
+Date: 2017-07-28
 Author: Charles Marsh [aut, cre]
 Maintainer: Charles Marsh <charliem2003@gmail.com>
 Description: A set of functions that downscales species occupancy at
@@ -43,4 +43,4 @@ Collate:
     'hui.downscale.R'
     'HuiFunctions.R'
     'upgrain.threshold.R'
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
