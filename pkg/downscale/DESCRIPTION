@@ -2,7 +2,7 @@ Package: downscale
 Type: Package
 Title: Downscaling Species Occupancy
 Version: 2.0-2
-Date: 2017-08-07
+Date: 2017-08-08
 Author: Charles Marsh [aut, cre]
 Maintainer: Charles Marsh <charliem2003@gmail.com>
 Description: A set of functions that downscales species occupancy at
